@@ -6,7 +6,7 @@ declare module 'koa' {
   interface DefaultState {}
 
   interface DefaultContext {
-    userId: string;
+    userId: number;
     username: string;
     params: any;
 

@@ -8,6 +8,7 @@ import router from './router';
 import LogMiddleware from './middleware/loggerMiddleware';
 import auth from './middleware/tokenAuth';
 import extendContext from './middleware/extendContext';
+import errMiddleware from './middleware/error';
 
 const app = new Koa();
 const port = config.network.port;
@@ -19,6 +20,7 @@ app.use(bodyparser({
 
 // 扩展 context
 app.use(extendContext);
+app.use(errMiddleware);
 
 app.use(LogMiddleware);
 

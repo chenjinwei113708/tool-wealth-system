@@ -8,3 +8,5 @@ export const CookiesName = {
   USERNAME: 'wealth_username',
   TOKEN: 'wealth_token',
 }
+
+export const jwtSecret = 'tools__wealth_sys_TokenSecret'; // token secret

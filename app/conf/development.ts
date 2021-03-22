@@ -8,7 +8,7 @@ export default {
     port: 3306,
     user: 'developer',
     password: 'jodoedev@ss',
-    database: 'wealth_system',
+    database: 'tools_wealth_system',
     dateStrings: true,
   },
 };
