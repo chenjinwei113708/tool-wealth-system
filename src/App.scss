@@ -1,0 +1,27 @@
+.common_wrap {
+  overflow: auto;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 20px;
+}
+
+.ant-breadcrumb.common_breadcrumb {
+  margin-bottom: 10px;
+}
+
+.common_table {
+  .ant-btn {
+    margin-right: 6px;
+  }
+}
+
+.ctrl_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .ant-btn + .ant-btn {
+    margin-left: 10px;
+  }
+}

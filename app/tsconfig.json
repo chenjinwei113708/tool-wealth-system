@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "charset": "utf8",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "pretty": true,
+    "module": "commonjs",
+    "types" : ["node"],
+    "outDir": "../app-build",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "app/*": ["./*"],
+      "util/*": ["./util/*"],
+      "conf/*": ["./conf/*"]
+    }
+  }
+}

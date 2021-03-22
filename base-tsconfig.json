@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./src/*"],
+      "api/*": ["./src/api/*"],
+      "~types/*": ["./src/types/*"]
+    }
+  },
+  "exclude": [
+    "app",
+    "conf"
+  ]
+}
