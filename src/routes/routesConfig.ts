@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, SettingOutlined } from '@ant-design/icons';
 
 export interface IRoute {
   exact?: boolean;
@@ -10,6 +10,9 @@ export interface IRoute {
   };
   component?: React.ComponentType<any>;
   children?: IRoute[];
+  auth?: string;
+  redirect?: string;
+  parent?: string;
   name: string;
   title: string;
   path: string;
@@ -30,6 +33,32 @@ export const MainRoutes: IRoute[] = [
         title: '金币查询',
         path: '/user/gold_search',
         component: lazy(() => import(/* webpackChunkName: "gold-search" */ '../views/Dashboard/User/GoldSearch')),
+        meta: {
+          auth: '',
+          a: 1,
+        }
+      }
+    ]
+  }
+]
+
+export const AdminRoutes: IRoute[] = [
+  {
+    name: 'system',
+    title: '系统管理',
+    path: '/system',
+    parent: 'index',
+    auth: 'system',
+    component: lazy(() => import(/* webpackChunkName: "system" */ '../views/System')),
+    meta: {
+      icon: SettingOutlined,
+    },
+    children: [
+      {
+        name: 'system-user',
+        title: '系统用户管理',
+        path: '/system/user',
+        component: lazy(() => import(/* webpackChunkName: "system-user" */ '../views/System/User')),
       }
     ]
   }

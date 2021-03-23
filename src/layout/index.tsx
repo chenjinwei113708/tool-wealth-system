@@ -9,7 +9,7 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import GetInfo from '@/views/GetInfo';
 
 // config
-import { IRoute, MainRoutes } from '@/routes/routesConfig';
+import { IRoute, MainRoutes, AdminRoutes } from '@/routes/routesConfig';
 
 // api
 import { UserApi } from '@/api';
@@ -24,6 +24,7 @@ const { Header, Content, Sider } = Layout;
 const { SubMenu, Item: MenuItem } = Menu;
 
 const VLayout: React.FC = props => {
+  const [routes, setRoutes] = useState<IRoute[]>(MainRoutes);
   const [selectKeys, setSelectKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const { state, dispatch } = useContext(Context);
@@ -96,10 +97,10 @@ const VLayout: React.FC = props => {
       defaultOpenKeys={openKeys}
       onClick={onClickItem}
     >
-      { renderMenu(MainRoutes) }
+      { renderMenu(routes) }
     </Menu>
     // eslint-disable-next-line
-  ), [selectKeys, openKeys])
+  ), [selectKeys, openKeys, routes])
 
   useEffect(() => {
     const path = history.location.pathname;
@@ -109,6 +110,14 @@ const VLayout: React.FC = props => {
       orginPath && setOpenKeys([`/${orginPath}`]);
     }
   }, [history]);
+
+  useEffect(() => {
+    if (state.userInfo.isAdmin) {
+      setRoutes([...MainRoutes, ...AdminRoutes]);
+    } else {
+      setRoutes(MainRoutes);
+    }
+  }, [state.userInfo])
 
   if (!state.userInfo.username) {
     return <GetInfo/>;

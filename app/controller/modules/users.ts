@@ -3,7 +3,7 @@ import Util from 'util/util';
 import log4js from 'util/log4js';
 import http from 'lib/axios';
 
-import { ParameterizedContext as Context } from 'koa';
+import { Next, ParameterizedContext as Context } from 'koa';
 import { CookiesName } from '@/config/common';
 
 const logger = log4js('users');
@@ -122,5 +122,91 @@ export default {
         roleId: userItem.role_id,
       }
     })
+  },
+
+  async adminAuthMid (ctx: Context, next: Next) {
+    const username = ctx.username;
+    if (!username) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: 'auth error',
+      });
+    }
+    const isAdmin = await Schemas.common.isAdmin(username);
+    if (!isAdmin) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: 'auth error',
+      });
+    }
+    return next();
+  },
+
+  async createUser (ctx: Context) {
+    const operator = ctx.username;
+
+    const { username, is_admin = 0, role_id } = ctx.request.body;
+    if (!username || !(username + '').trim()) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: '参数有误',
+      });
+    }
+    if (await Schemas.users.getByUsername(username)) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: '用户名已存在',
+      });
+    }
+
+    const res = await Schemas.users.create({
+      username,
+      is_admin,
+      role_id,
+      create_user: operator,
+    });
+
+    ctx.resHandler({
+      isSuccess: true,
+      data: {
+        id: res.insertId,
+      }
+    });
+  },
+
+  async updateUser (ctx: Context) {
+    const operator = ctx.username;
+
+    const { is_admin = 0, role_id, id } = ctx.request.body;
+
+    const res = await Schemas.users.update(id, {
+      is_admin,
+      role_id,
+      update_user: operator,
+    });
+
+    ctx.resHandler({
+      isSuccess: true,
+    });
+  },
+
+  async deleteUser (ctx: Context) {
+    const operator = ctx.username;
+    const { id } = ctx.request.body;
+
+    await Schemas.users.delete(id);
+    ctx.resHandler({
+      isSuccess: true,
+    });
+  },
+
+  async getUserList (ctx: Context) {
+    const list = await Schemas.users.getAll();
+    ctx.resHandler({
+      isSuccess: true,
+      data: {
+        list,
+      }
+    });
   },
 }

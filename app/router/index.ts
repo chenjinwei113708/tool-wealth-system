@@ -10,6 +10,12 @@ router.post('/api/login', ctrl.users.login);
 router.post('/api/logout', ctrl.users.logout);
 router.post('/api/user/info', ctrl.users.getUserInfo);
 
+// 用户管理
+router.post('/api/user/create', ctrl.users.adminAuthMid, ctrl.users.createUser);
+router.post('/api/user/update', ctrl.users.adminAuthMid, ctrl.users.updateUser);
+router.post('/api/user/delete', ctrl.users.adminAuthMid, ctrl.users.deleteUser);
+router.post('/api/user/list', ctrl.users.adminAuthMid, ctrl.users.getUserList);
+
 // 放在最后，404
 router.all('/api/*', ctrl.system.notFound);
 

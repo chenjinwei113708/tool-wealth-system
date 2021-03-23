@@ -1,5 +1,6 @@
 import moment from 'moment';
 import db from 'lib/db';
+import Util from '@/util/util';
 
 const TABLE_NAME = 't_account';
 
@@ -28,11 +29,14 @@ export default {
     is_admin?: 0 | 1,
     update_user: string,
   }) {
+    if (!id) {
+      throw new TypeError('参数有误');
+    }
     const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    const updateData = {
+    const updateData = Util.filterUndefined({
       ...params,
       update_time: currentTime,
-    }
+    })
     const res = await db.createQuery({
       query: 'UPDATE ?? SET ?, data_version=data_version+1 WHERE id=?;',
       params: [TABLE_NAME, updateData, id]
@@ -41,6 +45,9 @@ export default {
   },
 
   async delete (id: number) {
+    if (!id) {
+      throw new TypeError('参数有误');
+    }
     const res = await db.createQuery({
       query: 'DELETE FROM ?? WHERE id=? LIMIT 1;',
       params: [TABLE_NAME, id]
@@ -49,6 +56,9 @@ export default {
   },
 
   async deleteByUsername (username: string) {
+    if (!username) {
+      throw new TypeError('参数有误');
+    }
     const res = await db.createQuery({
       query: 'DELETE FROM ?? WHERE username=? LIMIT 1;',
       params: [TABLE_NAME, username]
@@ -57,6 +67,9 @@ export default {
   },
 
   async getById (id: number) {
+    if (!id) {
+      throw new TypeError('参数有误');
+    }
     const list = await db.createQuery({
       query: 'SELECT * from ?? WHERE id=? LIMIT 1;',
       params: [TABLE_NAME, id],
@@ -65,6 +78,9 @@ export default {
   },
 
   async getByUsername (username: string) {
+    if (!username) {
+      throw new TypeError('参数有误');
+    }
     const list = await db.createQuery({
       query: 'SELECT * from ?? WHERE username=? LIMIT 1;',
       params: [TABLE_NAME, username],

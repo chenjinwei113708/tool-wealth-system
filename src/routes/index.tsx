@@ -1,12 +1,20 @@
-import React, { Suspense, useMemo } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import RoutesConfig, { IRoute } from './routesConfig';
+import React, { Suspense, useContext, useEffect, useMemo, useState } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { Context } from '@/Store';
+import RoutesConfig, { IRoute, AdminRoutes } from './routesConfig';
 import Loading from '@/components/Loading';
 
 const renderRoutes = (routes: IRoute[]) => (
   <Switch>
     {
-      routes.map(route => (
+      routes.map(route => (route.redirect ? 
+        <Redirect 
+          key={route.name + route.path} 
+          exact={route.exact} 
+          from={route.path} 
+          to={route.redirect} 
+        />
+        :
         <Route
           key={route.name + route.path}
           path={route.path}
@@ -30,7 +38,33 @@ const renderRoutes = (routes: IRoute[]) => (
 );
 
 const Routes: React.FC = props => {
-  return useMemo(() => renderRoutes(RoutesConfig), []);
+  const [routes, setRoutes] = useState<IRoute[]>(RoutesConfig);
+  const { state } = useContext(Context);
+
+  useEffect(() => {
+    if (state.userInfo.isAdmin) {
+      const routeList = RoutesConfig.slice();
+      AdminRoutes.forEach(item => {
+        const index = RoutesConfig.findIndex(r => r.name === item.parent);
+        if (~index) {
+          routeList[index] = {
+            ...RoutesConfig[index],
+            children: [
+              item,
+              ...(RoutesConfig[index].children || []),
+            ]
+          }
+        } else {
+          routeList.push(item);
+        }
+      });
+      setRoutes(routeList);
+    } else {
+      setRoutes(RoutesConfig);
+    }
+  }, [state.userInfo])
+
+  return useMemo(() => renderRoutes(routes), [routes]);
 }
 
 export default Routes;
