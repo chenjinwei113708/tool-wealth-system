@@ -1,14 +1,39 @@
 import { lazy } from 'react';
+import { UserOutlined } from '@ant-design/icons';
 
 export interface IRoute {
   exact?: boolean;
   hidden?: boolean;
+  meta?: {
+    icon?: React.ComponentType;
+    [key: string]: any;
+  };
   component?: React.ComponentType;
   children?: IRoute[];
   name: string;
   title: string;
   path: string;
 }
+
+export const MainRoutes: IRoute[] = [
+  {
+    name: 'user',
+    title: '用户信息',
+    path: '/user',
+    component: lazy(() => import(/* webpackChunkName: "dashboard-user" */ '../views/Dashboard/User')),
+    meta: {
+      icon: UserOutlined,
+    },
+    children: [
+      {
+        name: 'user-gold-search',
+        title: '金币查询',
+        path: '/user/gold_search',
+        component: lazy(() => import(/* webpackChunkName: "gold-search" */ '../views/Dashboard/User/GoldSearch')),
+      }
+    ]
+  }
+]
 
 const Routes: IRoute[] = [
   {
@@ -34,6 +59,7 @@ const Routes: IRoute[] = [
     path: '/',
     component: lazy(() => import(/* webpackChunkName: "layout" */ '../layout')),
     children: [
+      ...MainRoutes,
       {
         hidden: true,
         name: '404',

@@ -1,18 +1,30 @@
-import React, { useContext } from 'react';
-import { Layout, message, Spin } from 'antd';
-import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Context } from '@/Store';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Context } from '@/Store';
 
-import { UserApi } from '@/api';
-
-import './index.scss';
+// components
+import { Layout, message, Spin, Menu } from 'antd';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import GetInfo from '@/views/GetInfo';
 
-const { Header, Content } = Layout;
+// config
+import { IRoute, MainRoutes } from '@/routes/routesConfig';
+
+// api
+import { UserApi } from '@/api';
+
+// d.ts
+import { MenuClickEventHandler } from 'rc-menu/lib/interface';
+
+// style
+import './index.scss';
+
+const { Header, Content, Sider } = Layout;
+const { SubMenu, Item: MenuItem } = Menu;
 
 const VLayout: React.FC = props => {
-  console.log('🚀 ~ props', props);
+  const [selectKeys, setSelectKeys] = useState<string[]>([]);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
   const { state, dispatch } = useContext(Context);
   const history = useHistory();
 
@@ -42,6 +54,43 @@ const VLayout: React.FC = props => {
       });
   }
 
+  const onClickItem: MenuClickEventHandler = (params) => {
+    console.log(params)
+    history.push(params.key + '');
+    setSelectKeys([params.key + '']);
+  }
+
+  const renderMenu = (routes: IRoute[]) => (
+    routes.map(route => (
+      route.children 
+        ? (
+          <SubMenu
+            key={route.path}
+            title={route.title}
+            icon={route.meta?.icon && React.createElement(route.meta?.icon)}
+          >
+            { renderMenu(route.children) }
+          </SubMenu>
+        )
+        : (
+          <MenuItem
+            key={route.path}
+          >
+            { route.title }
+          </MenuItem>
+        )
+    ))
+  )
+
+  useEffect(() => {
+    const path = history.location.pathname;
+    if (path && path !== '/') {
+      setSelectKeys([path]);
+      const orginPath = path.split('/')[1];
+      orginPath && setOpenKeys([`/${orginPath}`]);
+    }
+  }, [history]);
+
   if (!state.userInfo.username) {
     return <GetInfo/>;
   }
@@ -55,7 +104,6 @@ const VLayout: React.FC = props => {
       <Header className="layout_header">
         <div className="layout_header_nav">
           <h1 className="layout_header_title">网赚管理系统</h1>
-          {/* <Nav/> */}
         </div>
 
         <div className="layout_header_user">
@@ -67,9 +115,28 @@ const VLayout: React.FC = props => {
         </div>
       </Header>
 
-      <Content className="layout_content">
-        { props.children }
-      </Content>
+      <Layout className="layout_content">
+        <Sider
+          width={220}
+          collapsible
+          className="layout_sider"
+        >
+          <Menu
+            theme="dark"
+            mode="inline"
+            className="layout_sider_menu"
+            defaultSelectedKeys={selectKeys}
+            defaultOpenKeys={openKeys}
+            onClick={onClickItem}
+          >
+            { renderMenu(MainRoutes) }
+          </Menu>
+        </Sider>
+
+        <Content className="layout_main">
+          { props.children }
+        </Content>
+      </Layout>
     </Layout>
   )
 }
