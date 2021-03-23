@@ -8,7 +8,7 @@ export interface IRoute {
     icon?: React.ComponentType;
     [key: string]: any;
   };
-  component?: React.ComponentType;
+  component?: React.ComponentType<any>;
   children?: IRoute[];
   name: string;
   title: string;

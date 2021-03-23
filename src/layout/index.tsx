@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Context } from '@/Store';
 
 // components
+import { Helmet } from 'react-helmet';
 import { Layout, message, Spin, Menu } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import GetInfo from '@/views/GetInfo';
@@ -55,9 +56,11 @@ const VLayout: React.FC = props => {
   }
 
   const onClickItem: MenuClickEventHandler = (params) => {
-    console.log(params)
-    history.push(params.key + '');
-    // setSelectKeys([params.key + '']);
+    // console.log(params)
+    // history.push(params.key + '');
+    setSelectKeys([params.key + '']);
+    // const orginPath = params.keyPath[1] || (params.key + '').split('/')[1];
+    // orginPath && setOpenKeys([`/${orginPath}`]);
   }
 
   const renderMenu = (routes: IRoute[]) => (
@@ -76,7 +79,9 @@ const VLayout: React.FC = props => {
           <MenuItem
             key={route.path}
           >
-            { route.title }
+            <Link to={route.path}>
+              { route.title }
+            </Link>
           </MenuItem>
         )
     ))
@@ -87,7 +92,7 @@ const VLayout: React.FC = props => {
       theme="dark"
       mode="inline"
       className="layout_sider_menu"
-      defaultSelectedKeys={selectKeys}
+      selectedKeys={selectKeys}
       defaultOpenKeys={openKeys}
       onClick={onClickItem}
     >
@@ -111,6 +116,9 @@ const VLayout: React.FC = props => {
 
   return (
     <Layout className="layout">
+      <Helmet>
+        <title>网赚管理系统</title>
+      </Helmet>
       <div className={`layout_loading ${state.loading ? 'show' : ''}`}>
         <Spin size="large" tip="loading..." />
       </div>
