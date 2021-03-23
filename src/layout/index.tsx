@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Context } from '@/Store';
 
@@ -57,7 +57,7 @@ const VLayout: React.FC = props => {
   const onClickItem: MenuClickEventHandler = (params) => {
     console.log(params)
     history.push(params.key + '');
-    setSelectKeys([params.key + '']);
+    // setSelectKeys([params.key + '']);
   }
 
   const renderMenu = (routes: IRoute[]) => (
@@ -81,6 +81,20 @@ const VLayout: React.FC = props => {
         )
     ))
   )
+
+  const menu = useMemo(() => (
+    <Menu
+      theme="dark"
+      mode="inline"
+      className="layout_sider_menu"
+      defaultSelectedKeys={selectKeys}
+      defaultOpenKeys={openKeys}
+      onClick={onClickItem}
+    >
+      { renderMenu(MainRoutes) }
+    </Menu>
+    // eslint-disable-next-line
+  ), [selectKeys, openKeys])
 
   useEffect(() => {
     const path = history.location.pathname;
@@ -121,16 +135,7 @@ const VLayout: React.FC = props => {
           collapsible
           className="layout_sider"
         >
-          <Menu
-            theme="dark"
-            mode="inline"
-            className="layout_sider_menu"
-            defaultSelectedKeys={selectKeys}
-            defaultOpenKeys={openKeys}
-            onClick={onClickItem}
-          >
-            { renderMenu(MainRoutes) }
-          </Menu>
+          { menu }
         </Sider>
 
         <Content className="layout_main">
