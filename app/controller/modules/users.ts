@@ -62,8 +62,8 @@ export default {
       isSuccess: true,
       data: {
         username,
-        is_admin: userItem.is_admin,
-        role_id: userItem.role_id,
+        isAdmin: userItem.is_admin === 1,
+        roleId: userItem.role_id,
       }
     });
   },
@@ -95,5 +95,32 @@ export default {
         msg: "已退出登录",
       }
     });
+  },
+
+  async getUserInfo (ctx: Context) {
+    const username = ctx.cookies.get(CookiesName.USERNAME);
+    if (!username) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: 'auth error',
+      });
+    }
+
+    const userItem = await Schemas.users.getByUsername(username);
+    if (!userItem) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: '用户不存在',
+      });
+    }
+
+    ctx.resHandler({
+      isSuccess: true,
+      data: {
+        username,
+        isAdmin: userItem.is_admin === 1,
+        roleId: userItem.role_id,
+      }
+    })
   },
 }

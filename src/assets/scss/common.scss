@@ -1,0 +1,36 @@
+/*
+ * 公共样式
+ */
+
+// 空文本样式
+.empty_text {
+  line-height: 60px;
+  font-size: 14px;
+  text-align: center;
+  color: #909399;
+}
+
+.paginationDiv {
+  text-align: right;
+  margin: 15px 0 0;
+}
+
+.edit_form_btns {
+  text-align: right;
+
+  button + button {
+    margin-left: 15px;
+  }
+}
+
+.btn_groups {
+  button + button {
+    margin-left: 10px;
+  }
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

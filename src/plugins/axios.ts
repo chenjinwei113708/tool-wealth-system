@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import history from '@/plugins/history';
 
 export interface IResponse {
-  // code?: any;
+  code?: any;
   isSuccess: boolean;
   data: any;
   msg: any;
@@ -59,7 +59,7 @@ const handleResponse = function (res: AxiosResponse<any>) {
     case 203:
       message.error('请登录');
       const originPath = window.location.pathname + window.location.search;
-      history.push('/login?redirect=' + encodeURIComponent(originPath));
+      history.push(originPath === '/' ? '/login' : `/login?redirect=${encodeURIComponent(originPath)}`);
       return Promise.reject(new ErrorProcessor(res.status));
     default:
       return Promise.reject(new ErrorProcessor(res.status));
