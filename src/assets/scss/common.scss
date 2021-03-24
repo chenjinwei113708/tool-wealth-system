@@ -34,3 +34,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.ctrl_bar {
+  display: flex;
+  margin-bottom: 15px;
+
+  &.right {
+    justify-content: flex-end;
+  }
+  &.between {
+    justify-content: space-between;
+  }
+}

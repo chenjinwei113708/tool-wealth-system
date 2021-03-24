@@ -1,6 +1,8 @@
 export default {
   network: {
     port: 5002,
+
+    serverHost: 'http://10.10.10.250:8080',
   },
 
   database: {
