@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Button, message, Popconfirm, Table } from 'antd';
 import { SyncOutlined, PlusOutlined } from '@ant-design/icons';
 
@@ -64,6 +65,10 @@ const SystemUser: React.FC = props => {
 
   return (
     <main className="system_user">
+      <Helmet>
+        <title>用户管理_系统管理 - { window.originTitle }</title>
+      </Helmet>
+
       <div className="ctrl">
         <Button type="primary" icon={<PlusOutlined />} onClick={() => setShowEditForm(true)}>添加</Button>
         <Button type="primary" icon={<SyncOutlined />} onClick={getUserList}>刷新</Button>
