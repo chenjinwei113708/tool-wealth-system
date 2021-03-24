@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { UserOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, SettingOutlined, TagsOutlined } from '@ant-design/icons';
 
 export interface IRoute {
   exact?: boolean;
@@ -40,6 +40,23 @@ export const MainRoutes: IRoute[] = [
         path: '/user/gold_detail',
         component: lazy(() => import(/* webpackChunkName: "gold-detail" */ '../views/Dashboard/User/GoldDetail')),
       }
+    ]
+  },
+  {
+    name: 'cash',
+    title: '提现管理',
+    path: '/cash',
+    component: lazy(() => import(/* webpackChunkName: "dashboard-cash" */ '../views/Dashboard/Cash')),
+    meta: {
+      icon: TagsOutlined,
+    },
+    children: [
+      {
+        name: 'cash-verify',
+        title: '提现审核',
+        path: '/cash/verify',
+        component: lazy(() => import(/* webpackChunkName: "cash-verify" */ '../views/Dashboard/Cash/Verify')),
+      },
     ]
   }
 ]
