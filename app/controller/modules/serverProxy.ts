@@ -58,7 +58,7 @@ export default {
         params: {
           userId,
           appname,
-          status,
+          status: status === undefined ? '' : status + '',
         },
         pageNumber,
         pageSize,
