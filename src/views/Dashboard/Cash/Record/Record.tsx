@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Button, Form, Input, message, Table, Pagination, Popconfirm } from 'antd';
-import { CashStatusMap } from '../config';
+import { Button, Form, Input, message, Table, Pagination, Select } from 'antd';
+import { CashStatusMap, CashStatusTypes } from '../config';
 
 import { WealthUserApi } from '@/api';
 
+import './Record.scss';
+
 const FormItem = Form.Item;
+const { Option } = Select;
 const { Column } = Table;
 
-const CashVerify: React.FC = props => {
+const CashRecord: React.FC = props => {
   const [loading, setLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize] = useState(20);
@@ -16,10 +19,6 @@ const CashVerify: React.FC = props => {
   const [dataList, setDataList] = useState<any[]>([]);
 
   const [form] = Form.useForm();
-
-  const onClickResolve = async (item: any) => {}
-
-  const onClickReject = async (item: any) => {}
 
   const onPageChange = (page: number) => {
     setPageNumber(page);
@@ -49,7 +48,6 @@ const CashVerify: React.FC = props => {
         pageNumber,
         pageSize,
         ...data,
-        status: 1,
       });
       setTotal(resData.totalCount);
       setDataList(resData.list);
@@ -61,9 +59,9 @@ const CashVerify: React.FC = props => {
   }
 
   return (
-    <main className="">
+    <main className="cash_record">
       <Helmet>
-        <title>提现审核 - { window.originTitle }</title>
+        <title>提现记录 - { window.originTitle }</title>
       </Helmet>
 
       <Form
@@ -84,7 +82,25 @@ const CashVerify: React.FC = props => {
           name="appname"
           label="应用名称"
         >
-          <Input placeholder="应用名称" />
+          <Input placeholder="应用名称" allowClear />
+        </FormItem>
+        <FormItem
+          name="status"
+          label="状态"
+        >
+          <Select
+            allowClear
+            placeholder="提现状态"
+            style={{
+              width: 180,
+            }}
+          >
+            {
+              CashStatusTypes.map(item => (
+                <Option key={item.value} value={item.value}>{item.label}</Option>
+              ))
+            }
+          </Select>
         </FormItem>
         <FormItem>
           <Button
@@ -120,8 +136,8 @@ const CashVerify: React.FC = props => {
           key="status" 
           width="130px" 
           render={(value) => (
-            <span>
-              {(CashStatusMap as any)[value] || value}
+            <span className={`status${value}`}>
+              {CashStatusMap[value] || value}
             </span>
           )}
         />
@@ -129,37 +145,6 @@ const CashVerify: React.FC = props => {
         <Column title="提现金额" dataIndex="reviewCash" key="reviewCash" width="130px" />
         <Column title="创建时间" dataIndex="createTime" key="createTime" width="175px" />
         <Column title="修改时间" dataIndex="updateTime" key="updateTime" width="175px" />
-        <Column 
-          title="操作" 
-          dataIndex="ctrl" 
-          key="ctrl" 
-          width="140px" 
-          fixed="right" 
-          render={(value, record) => (<>
-            <Popconfirm
-              placement="topRight"
-              title="确认通过？"
-              onConfirm={() => { onClickResolve(record) }}
-            >
-              <Button 
-                size="small" 
-                type="primary" 
-                style={{
-                  marginRight: 10,
-                }}
-              >
-                通过
-              </Button>
-            </Popconfirm>
-            <Popconfirm
-              placement="topRight"
-              title="确认拒绝？"
-              onConfirm={() => { onClickReject(record) }}
-            >
-              <Button size="small" type="primary" danger>拒绝</Button>
-            </Popconfirm>
-          </>)}
-        />
       </Table>
 
       <div className="paginationDiv">
@@ -175,4 +160,4 @@ const CashVerify: React.FC = props => {
   )
 }
 
-export default CashVerify;
+export default CashRecord;

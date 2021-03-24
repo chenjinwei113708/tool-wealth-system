@@ -57,6 +57,12 @@ export const MainRoutes: IRoute[] = [
         path: '/cash/verify',
         component: lazy(() => import(/* webpackChunkName: "cash-verify" */ '../views/Dashboard/Cash/Verify')),
       },
+      {
+        name: 'cash-record',
+        title: '提现记录',
+        path: '/cash/record',
+        component: lazy(() => import(/* webpackChunkName: "cash-record" */ '../views/Dashboard/Cash/Record')),
+      },
     ]
   }
 ]
