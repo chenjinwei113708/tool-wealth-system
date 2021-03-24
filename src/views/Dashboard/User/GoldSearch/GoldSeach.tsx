@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { RouteChildrenProps } from 'react-router-dom';
 import { Button, Form, Input, message, Table, Pagination } from 'antd';
+import EditForm from './components/EditForm';
 
 import { WealthUserApi } from '@/api';
 
@@ -14,7 +15,29 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
   const [pageSize] = useState(20);
   const [total, setTotal] = useState(0);
   const [dataList, setDataList] = useState<any[]>([]);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editData, setEditData] = useState<any>(null);
+
   const [form] = Form.useForm();
+
+  const onClickEdit = (item: any) => {
+    if (!item) {
+      return;
+    }
+    setEditData(item);
+    setShowEditForm(true);
+  }
+
+  const onEditFormClose = () => {
+    setShowEditForm(false);
+    setEditData(null);
+  }
+
+  const onEditFormFinish = () => {
+    getList({
+      ...form.getFieldsValue(),
+    });
+  }
 
   const onPageChange = (page: number) => {
     setPageNumber(page);
@@ -45,7 +68,6 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
         pageSize,
         ...data,
       });
-      console.log('🚀 ~ onClickSearch ~ resData', resData);
       setTotal(resData.totalCount);
       setDataList(resData.list);
     } catch (e) {
@@ -115,7 +137,16 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
         <Column title="累计提现" dataIndex="accumulateReview" key="accumulateReview" width="110px" />
         <Column title="创建时间" dataIndex="createTime" key="createTime" width="175px" />
         <Column title="修改时间" dataIndex="updateTime" key="updateTime" width="175px" />
-        <Column title="操作" dataIndex="ctrl" key="ctrl" width="100px" fixed="right" />
+        <Column 
+          title="操作" 
+          dataIndex="ctrl" 
+          key="ctrl" 
+          width="100px" 
+          fixed="right" 
+          render={(value, record) => (<>
+            <Button size="small" type="primary" onClick={() => { onClickEdit(record) }}>修改</Button>
+          </>)}
+        />
       </Table>
 
       <div className="paginationDiv">
@@ -127,6 +158,16 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
           onChange={onPageChange}
         />
       </div>
+
+      {
+        showEditForm ? (
+          <EditForm
+            editData={editData}
+            onClose={onEditFormClose}
+            onFresh={onEditFormFinish}
+          />
+        ) : null
+      }
     </main>
   )
 }

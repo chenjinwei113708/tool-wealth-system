@@ -13,4 +13,18 @@ export default {
       data,
     });
   },
+
+  updateUserGold (data: {
+    leftCash?: number,
+    frozenCash?: number,
+    accumulateCash?: number,
+    accumulateReview?: number,
+    id: string,
+  }) {
+    return axios({
+      url: '/api/wealth/user/gold/update',
+      method: 'POST',
+      data,
+    });
+  },
 }

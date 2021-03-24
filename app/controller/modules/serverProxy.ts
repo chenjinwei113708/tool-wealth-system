@@ -29,4 +29,23 @@ export default {
     });
     ctx.resHandler(resData);
   },
+
+  async updateUserGold (ctx: Context) {
+    const { id, leftCash, frozenCash, accumulateCash, accumulateReview } = ctx.request.body;
+    if (!id) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: '参数有误',
+      });
+    }
+
+    const resData = await http({
+      url: `${serverHost}/user/update`,
+      method: 'POST',
+      data: {
+        ...ctx.request.body,
+      }
+    });
+    ctx.resHandler(resData);
+  },
 }

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, message, Popconfirm, Table } from 'antd';
 import { SyncOutlined, PlusOutlined } from '@ant-design/icons';
+import EditForm from './components/EditForm';
 
 import { UserApi } from '@/api';
 
 import './User.scss';
-import EditForm from './components/EditForm';
 
 const { Column } = Table;
 
