@@ -19,6 +19,7 @@ router.post('/api/user/list', ctrl.users.adminAuthMid, ctrl.users.getUserList);
 // 网赚用户相关
 router.post('/api/wealth/user/gold', ctrl.serverProxy.getUserGold);
 router.post('/api/wealth/user/gold/update', ctrl.serverProxy.updateUserGold);
+router.post('/api/wealth/user/cash', ctrl.serverProxy.getUserCashRecord);
 
 // 放在最后，404
 router.all('/api/*', ctrl.system.notFound);

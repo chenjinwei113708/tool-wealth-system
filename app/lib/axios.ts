@@ -87,6 +87,11 @@ const axiosThen = function (response: AxiosResponse) {
   })));
 };
 
+// instance.interceptors.request.use(config => {
+//   console.log(config.data)
+//   return config;
+// })
+
 instance.interceptors.response.use((response): Promise<any> => {
   // 对响应数据做点什么
   return axiosThen(response);

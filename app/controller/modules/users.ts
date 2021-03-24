@@ -137,7 +137,7 @@ export default {
       return ctx.resHandler({
         isSuccess: false,
         msg: 'auth error',
-      });
+      }, 403);
     }
     return next();
   },

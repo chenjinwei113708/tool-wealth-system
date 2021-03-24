@@ -8,6 +8,7 @@ import { Next, ParameterizedContext as Context } from 'koa';
 import { CookiesName } from '@/config/common';
 
 const { serverHost } = Conf.network;
+const logger = log4js('serverProxy');
 
 export default {
   async getUserGold (ctx: Context) {
@@ -17,14 +18,12 @@ export default {
       url: `${serverHost}/user/getByPage`,
       method: 'POST',
       data: {
-        page: {
-          params: {
-            userId,
-            appname,
-          },
-          pageNumber,
-          pageSize,
-        }
+        params: {
+          userId,
+          appname,
+        },
+        pageNumber,
+        pageSize,
       }
     });
     ctx.resHandler(resData);
@@ -44,6 +43,25 @@ export default {
       method: 'POST',
       data: {
         ...ctx.request.body,
+      }
+    });
+    ctx.resHandler(resData);
+  },
+
+  async getUserCashRecord (ctx: Context) {
+    const { userId, appname, pageNumber = 1, pageSize = 20, status, } = ctx.request.body;
+
+    const resData = await http({
+      url: `${serverHost}/review/getByPage`,
+      method: 'POST',
+      data: {
+        params: {
+          userId,
+          appname,
+          status,
+        },
+        pageNumber,
+        pageSize,
       }
     });
     ctx.resHandler(resData);

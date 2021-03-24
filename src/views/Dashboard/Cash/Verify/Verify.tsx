@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Button, Form, Input, message, Table, Pagination } from 'antd';
+import { Button, Form, Input, message, Table, Pagination, Popconfirm } from 'antd';
 
 import { WealthUserApi } from '@/api';
+import { CashStatusMap } from '../config';
 
 const FormItem = Form.Item;
 const { Column } = Table;
@@ -15,6 +16,10 @@ const CashVerify: React.FC = props => {
   const [dataList, setDataList] = useState<any[]>([]);
 
   const [form] = Form.useForm();
+
+  const onClickResolve = async (item: any) => {}
+
+  const onClickReject = async (item: any) => {}
 
   const onPageChange = (page: number) => {
     setPageNumber(page);
@@ -40,11 +45,13 @@ const CashVerify: React.FC = props => {
   }) => {
     setLoading(true);
     try {
-      const resData = await WealthUserApi.getUserGold({
+      const resData = await WealthUserApi.getUserCashRecord({
         pageNumber,
         pageSize,
         ...data,
+        status: 1,
       });
+      console.log('🚀 ~ resData', resData);
       setTotal(resData.totalCount);
       setDataList(resData.list);
     } catch (e) {
@@ -72,7 +79,7 @@ const CashVerify: React.FC = props => {
           name="userId"
           label="用户ID"
         >
-          <Input placeholder="用户ID" />
+          <Input placeholder="用户ID" allowClear />
         </FormItem>
         <FormItem
           name="appname"
@@ -102,18 +109,58 @@ const CashVerify: React.FC = props => {
           x: 'max-content'
         }}
       >
-        <Column title="id" dataIndex="id" key="id" width="200px" />
+        <Column title="id" dataIndex="id" key="id" width="110px" />
         <Column title="用户ID" dataIndex="userId" key="userId" width="160px" />
         <Column title="应用名称" dataIndex="appname" key="appname" width="180px" />
-        <Column title="包名" dataIndex="packageName" key="packageName" width="180px" />
         <Column title="idfa" dataIndex="idfa" key="idfa" width="180px" />
         <Column title="puid" dataIndex="puid" key="puid" width="140px" />
-        <Column title="剩余金币" dataIndex="leftCash" key="leftCash" width="110px" />
-        <Column title="冻结金币" dataIndex="frozenCash" key="frozenCash" width="100px" />
-        <Column title="累计获得金币" dataIndex="accumulateCash" key="accumulateCash" width="130px" />
-        <Column title="累计提现" dataIndex="accumulateReview" key="accumulateReview" width="110px" />
+        <Column title="类型" dataIndex="itemName" key="itemName" width="140px" />
+        <Column 
+          title="状态" 
+          dataIndex="status" 
+          key="status" 
+          width="130px" 
+          render={(value) => (
+            <span>
+              {(CashStatusMap as any)[value] || value}
+            </span>
+          )}
+        />
+        <Column title="提现金币数" dataIndex="frozenCash" key="frozenCash" width="100px" />
+        <Column title="提现金额" dataIndex="reviewCash" key="reviewCash" width="130px" />
         <Column title="创建时间" dataIndex="createTime" key="createTime" width="175px" />
         <Column title="修改时间" dataIndex="updateTime" key="updateTime" width="175px" />
+        <Column 
+          title="操作" 
+          dataIndex="ctrl" 
+          key="ctrl" 
+          width="140px" 
+          fixed="right" 
+          render={(value, record) => (<>
+            <Popconfirm
+              placement="topRight"
+              title="确认通过？"
+              onConfirm={() => { onClickResolve(record) }}
+            >
+              <Button 
+                size="small" 
+                type="primary" 
+                style={{
+                  marginRight: 10,
+                }}
+              >
+                通过
+              </Button>
+            </Popconfirm>
+            <Popconfirm
+              placement="topRight"
+              title="确认拒绝？"
+              onConfirm={() => { onClickReject(record) }}
+            >
+              <Button size="small" type="primary" danger>拒绝</Button>
+            </Popconfirm>
+          </>)}
+        />
       </Table>
 
       <div className="paginationDiv">

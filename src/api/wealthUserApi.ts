@@ -27,4 +27,18 @@ export default {
       data,
     });
   },
+
+  getUserCashRecord (data: {
+    pageNumber?: number,
+    pageSize?: number,
+    userId?: string,
+    appname?: string,
+    status?: number,
+  }) {
+    return axios({
+      url: '/api/wealth/user/cash',
+      method: 'POST',
+      data,
+    });
+  },
 }
