@@ -55,7 +55,7 @@ const CashVerify: React.FC = props => {
   }
 
   return (
-    <main className="user_gold_search">
+    <main className="">
       <Helmet>
         <title>提现审核 - { window.originTitle }</title>
       </Helmet>
