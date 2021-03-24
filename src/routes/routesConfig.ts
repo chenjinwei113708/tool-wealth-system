@@ -56,7 +56,7 @@ export const AdminRoutes: IRoute[] = [
     children: [
       {
         name: 'system-user',
-        title: '系统用户管理',
+        title: '用户管理',
         path: '/system/user',
         component: lazy(() => import(/* webpackChunkName: "system-user" */ '../views/System/User')),
       }
