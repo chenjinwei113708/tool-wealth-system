@@ -33,10 +33,12 @@ export const MainRoutes: IRoute[] = [
         title: '金币查询',
         path: '/user/gold_search',
         component: lazy(() => import(/* webpackChunkName: "gold-search" */ '../views/Dashboard/User/GoldSearch')),
-        meta: {
-          auth: '',
-          a: 1,
-        }
+      },
+      {
+        name: 'user-gold-detail',
+        title: '金币明细',
+        path: '/user/gold_detail',
+        component: lazy(() => import(/* webpackChunkName: "gold-detail" */ '../views/Dashboard/User/GoldDetail')),
       }
     ]
   }
