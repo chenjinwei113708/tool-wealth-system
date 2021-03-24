@@ -51,7 +51,6 @@ const CashVerify: React.FC = props => {
         ...data,
         status: 1,
       });
-      console.log('🚀 ~ resData', resData);
       setTotal(resData.totalCount);
       setDataList(resData.list);
     } catch (e) {

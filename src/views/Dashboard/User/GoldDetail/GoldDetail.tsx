@@ -73,7 +73,7 @@ const GoldDetail: React.FC<RouteChildrenProps> = props => {
           name="userId"
           label="用户ID"
         >
-          <Input placeholder="用户ID" />
+          <Input placeholder="用户ID" allowClear />
         </FormItem>
         <FormItem
           name="appname"
