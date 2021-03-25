@@ -104,11 +104,22 @@ const GoldDetail: React.FC<RouteChildrenProps> = props => {
         }}
       >
         <Column title="id" dataIndex="id" key="id" width="200px" />
-        <Column title="用户ID" dataIndex="userId" key="userId" width="160px" />
-        <Column title="应用名称" dataIndex="appname" key="appname" width="180px" />
-        <Column title="包名" dataIndex="packageName" key="packageName" width="180px" />
+        <Column title="用户ID" dataIndex="userId" key="userId" width="150px" />
+        <Column title="应用名称" dataIndex="appname" key="appname" width="160px" />
+        <Column title="包名" dataIndex="pn" key="pn" width="160px" />
+        <Column title="cgi" dataIndex="cgi" key="cgi" width="110px" />
         <Column title="idfa" dataIndex="idfa" key="idfa" width="180px" />
         <Column title="puid" dataIndex="puid" key="puid" width="140px" />
+        <Column 
+          title="操作系统" 
+          dataIndex="os" 
+          key="os" 
+          width="80px" 
+          render={ value => 
+            <p className="ellipsis" style={{ width: 80 }} title={value}>{value}</p> 
+          } 
+        />
+        <Column title="SDK版本" dataIndex="sdkVersion" key="sdkVersion" width="80px" />
         <Column title="剩余金币" dataIndex="leftCash" key="leftCash" width="110px" />
         <Column title="冻结金币" dataIndex="frozenCash" key="frozenCash" width="100px" />
         <Column title="累计获得金币" dataIndex="accumulateCash" key="accumulateCash" width="130px" />
