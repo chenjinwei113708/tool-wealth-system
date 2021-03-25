@@ -1,0 +1,46 @@
+{
+  "name": "jodoinc",
+  "version": "1.0.0",
+  "description": "jodoinc 官网",
+  "author": "Willie Chen",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon app/index.js",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node app/index.js",
+    "ser": "npm run build && npm run start",
+    "prod": "npm run start",
+    "prod:local": "cross-env HOST=0.0.0.0 NODE_ENV=production node app/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.9.7",
+    "axios": "^0.19.2",
+    "cross-env": "^5.2.0",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "log4js": "^6.2.1",
+    "moment": "^2.26.0",
+    "mysql": "^2.18.1",
+    "node-sass": "^4.13.1",
+    "nuxt": "^2.12.2",
+    "nuxt-i18n": "^6.9.2",
+    "sass-loader": "^8.0.2",
+    "swiper": "^5.4.1",
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-totop": "^1.0.3"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^0.6.5",
+    "@nuxtjs/style-resources": "^1.0.0",
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.0",
+    "@types/swiper": "^5.3.1",
+    "autoprefixer": "^9.7.6",
+    "nodemon": "^2.0.3",
+    "postcss-hexrgba": "^2.0.0",
+    "postcss-nested": "^4.2.1"
+  }
+}

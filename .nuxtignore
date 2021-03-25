@@ -1,0 +1,2 @@
+# 忽略 pages 下的 components 文件
+src/pages/**/components/*.*

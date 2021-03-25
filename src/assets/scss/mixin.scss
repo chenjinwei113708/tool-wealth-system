@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+// ----- px2rem -----
+
+$design-width: 1920px!default;
+$px-only: false; // true for lt IE8
+
+@function px2rem($pxs) {
+    $list: ();
+    @each $px in $pxs {
+        @if (unitless($px)) {
+            /*@warn 'Assuming #{$px} to be in pixels, attempting to convert it into pixels for you';
+      @return px2em($px + 0px); // That may fail.*/
+            @warn 'No unit. Pls set "px" to the numbers.';
+        }
+        @else if (unit($px)=='px') {
+            @if ($px-only) {
+                $list: append($list, $px);
+            }
+            @else {
+                // 这里的0.1对应计算html的font-size时的0.1
+                // 推导：
+                // 因为 designContentWidth / designWidth = (htmlFontSize * ? rem) / deviceWidth
+                // 其中 htmlFontSize = deviceWidth * 0.1
+                // 所以 ? rem = (designContentWidth / (designWidth * 0.1)) * 1rem
+                $list: append($list, ($px / ($design-width * 0.1)) * 1rem);
+            }
+        }
+        @else {
+            @warn 'Wrong unit. Pls set "px" to the numbers.';
+        }
+    }
+    @return $list();
+}
+
+// /* 设置宽高 */
+@mixin setWH($width, $height) {
+  width : px2rem($width);
+  height: px2rem($height);
+}
+
+// /* 相对父元素定位: $left: 左位移    $top: 上位移 */
+// @mixin absByParent($left:0, $top:0, $bottom:0, $right:0) {
+//   position: absolute;
+//   left    : px2rem($left);
+//   top     : px2rem($top);
+//   bottom  : px2rem($bottom);
+//   right   : px2rem($right);
+// }

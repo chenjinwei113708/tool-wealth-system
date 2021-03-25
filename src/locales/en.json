@@ -1,0 +1,393 @@
+{
+  "about": "about",
+  "header": {
+    "index": {
+      "title": "Home"
+    },
+    "join": {
+      "subs": {
+        "campus": "Campus Recruitment",
+        "grow": "Training and Development",
+        "society": "Social Recruitment",
+        "welfare": "Benefits"
+      },
+      "title": "Join us"
+    },
+    "news": {
+      "subs": {
+        "activity": "Activity Information",
+        "company": "Company Information",
+        "training": "Training Information"
+      },
+      "title": "News"
+    },
+    "service": {
+      "subs": {
+        "bigData": "Big Data Business",
+        "enterprise": "Corporate Services",
+        "game": "Game Business",
+        "software": "Software Service",
+        "ecommerce": "E-commerce APP"
+      },
+      "title": "JODO Business"
+    },
+    "story": {
+      "subs": {
+        "env": "JODO Environment",
+        "history": "Development History",
+        "honor": "JODO Honor",
+        "profile": "Company Profile",
+        "team": "JODO Team"
+      },
+      "title": "JODO Story"
+    },
+    "contact": {
+      "title": "Contact us"
+    }
+  },
+  "footer": {
+    "jodo": "Guangzhou JODO Tech Ltd",
+    "bePartnerHd": "To be business partner",
+    "cooperate": "Cooperation",
+    "employ": "Recruitment",
+    "focusHd": "Follow JODO Tech",
+    "legal": "Legal Notices",
+    "policy": "Privacy policy"
+  },
+  "index": {
+    "title": "Internet service provider for the world",
+    "titleIntro": {
+      "intro1": "Business diversification",
+      "intro2": "Service customization",
+      "intro3": "Market globalization"
+    },
+    "sloganSection": {
+      "regions": {
+        "Australia": "Australia",
+        "Brazil": "Brazil",
+        "Canada": "Canada",
+        "French": "France",
+        "Guangzhou": "Guangzhou",
+        "Japan": "Japan",
+        "Russian": "Russia",
+        "UK": "United Kingdom",
+        "USA": "United States"
+      },
+      "btn": "JODO Story",
+      "desc1": "Guangzhou JODO Tech Ltd. is committed to Publishing and Developing Game, E-Commerce, Application Software, Enterprise Services and other fields;",
+      "desc2": "Hitherto, our business has covered more than 70 countries and will continue to explore more possibilities in the future.",
+      "title": "Do Something Impressive With the Heart of Excellence"
+    },
+    "service": {
+      "contents": {
+        "bigData": {
+          "content": "High-performance user portrait query and exploration, AB effect tracking, effectively solve the industry's weak spots such as low marketing efficiency and insensitive business insights faced by merchants, and create targeted personalized marketing solutions.",
+          "title": "Big Data and AI"
+        },
+        "enterprise": {
+          "content": "Provide technical support, financial planning, business management consulting, talent recruitment, business promotion, and other diversified business management consulting services for entrepreneurial teams and enterprises to achieve resource sharing and mutual benefit.",
+          "title": "Corporate Services"
+        },
+        "game": {
+          "content": "JODO is the pioneer of \"overseas business\" in the game industry. It has a wealth of developers and network cooperation resources and is committed to exploring the global cooperation.",
+          "title": "Game business"
+        },
+        "software": {
+          "content": "Develop and operate live entertainment, software cleaner, and other tool products, provide personalized advertising recommendations for different users, and maximize advertising benefits and rate of return.",
+          "title": "Software Service"
+        }
+      },
+      "desc": "JODO upholds the business philosophy of \"Diversity, Cooperation， and Win-win\" and is committed to becoming the world's leading Internet service provider.",
+      "title": "Our business"
+    },
+    "advantage": {
+      "contents": {
+        "item1": {
+          "content1": "Years of accumulation in the Internet industry",
+          "content2": "Rich overseas experience",
+          "title": "Extensive overseas experience"
+        },
+        "item2": {
+          "content1": "Creative young team",
+          "content2": "Extremely agile and efficient",
+          "title": "Efficient business team"
+        },
+        "item3": {
+          "content1": "Strategical tool support",
+          "content2": "Business support with leading technology",
+          "title": "Leading technology advantage"
+        },
+        "item4": {
+          "content1": "Abundant industry power",
+          "content2": "High-quality industrial chain integration capabilities",
+          "title": "Rich industrial resources"
+        },
+        "item5": {
+          "content1": "Polish products based on global user feedback",
+          "content2": "Global channel vision",
+          "title": "Seeing business from a global perspective"
+        }
+      },
+      "desc": "Only innovation and perseverance can achieve success",
+      "title": "Our advantage"
+    },
+    "moment": {
+      "btn": "More News",
+      "title": "Latest News"
+    }
+  },
+  "story": {
+    "subTitle": "The heart of excellence-touching things",
+    "title": "JODO Story",
+    "infos": {
+      "contents": {
+        "content1": "Game publishing",
+        "content2": "Corporate Services",
+        "content3": "Game development",
+        "content4": "Application",
+        "content5": "E-Commerce"
+      },
+      "desc1": "Guangzhou JODO Tech Ltd. is committed to Publishing and Developing Game, E-Commerce, Application Software, Enterprise Services and other fields.",
+      "desc2": "From starting the game to the sea to multi-project, multi-service and multi-field parallel, JODO has covered the business in more than 70 countries around the world,",
+      "desc3": "And continue to explore in more business areas. \nIn the future, JODO is the leader and explorer of the Internet industry, will adhere to the \"diversity, cooperation, win-win\" business philosophy, is committed to becoming the world's leading Internet service provider.",
+      "title": "JODO Tech"
+    },
+    "team": {
+      "list": {
+        "title": "Partner-Director",
+        "title2": "Partner-Director-Party Branch Secretary"
+      },
+      "subTitle": "No company's success depends solely on one person. Thanks to our team, let us support each other, learn, and grow together on the road to running for our dreams.",
+      "title": "JODO is always grateful to be with you"
+    },
+    "environment": {
+      "subTitle": "Struggling so far, we have always dreamed and persevered.",
+      "title": "This is a story about struggle",
+      "video": {
+        "tip": "Click to play",
+        "title": "This is a story about struggle..."
+      }
+    },
+    "honor": {
+      "subTitle": "Every growth and transformation of JODO is inseparable from every JODO staff who must achieve their mission",
+      "title": "JODO Honor"
+    },
+    "history": {
+      "list": {
+        "year13": {
+          "content1": "JODO was formally established in September 2013",
+          "title": "year 2013"
+        },
+        "year15": {
+          "content1": "Outstanding product exhibition in September 2015",
+          "title": "2015"
+        },
+        "year16": {
+          "content1": "Without any financing plan, JODO grew and developed with its own profits. It got a pretty .commendable result in August 2016.",
+          "title": "2016"
+        },
+        "year17": {
+          "content1": "In August 2017, it won the Best Game Award of Ali Game Ecology Party.",
+          "title": "2017"
+        },
+        "year18": {
+          "content1": "In January 2018, the first self-developed & published mobile game Super Hospital was launched.",
+          "title": "2018"
+        },
+        "year19": {
+          "content1": "Identified as a technologically advanced service company in 2019",
+          "content2": "In January 2019, the self-developed & published game \"Idle Cook\" was recommended by Apple's Editor’s Choice",
+          "content3": "In 2019, it was appraised as a key cultivation enterprise of service trade in Guangzhou",
+          "content4": "Established Superera, a casual game publishing brand, in May 2019, expanding hundreds of global casual game developers",
+          "title": "2019"
+        }
+      },
+      "subTitle": "In 2020, explore diversified business...",
+      "title": "JODO's History and Innovation"
+    }
+  },
+  "bigData": {
+    "platform": {
+      "list": {
+        "content1": "Track consumption hot spots and guide suppliers and sellers to target production or sales",
+        "content2": "Open up data blocking, link upstream and downstream, support the industrial upgrading of SMEs",
+        "item1": "supplier",
+        "item2": "consumer",
+        "item3": "Agent",
+        "item4": "Seller"
+      },
+      "title": "What our platform can do"
+    },
+    "straits": {
+      "list": {
+        "content1": "Single business model, need transformation and upgrading urgently",
+        "content2": "Operating costs increase and profits decline",
+        "content3": "E-commerce siege",
+        "content4": "Lack of interaction",
+        "content5": "Fragmented data, information blocking",
+        "content6": "Homogenization of goods"
+      },
+      "title": "Difficulties faced by traditional enterprises"
+    },
+    "subTitle": "Drive sales with numbers, open the \"Internet +\" model, and create an integrated digital marketing intelligent service platform,",
+    "subTitle2": "Build a more effective communication bridge between suppliers/distributors/agents/consumers",
+    "title": "JODO Big Data Precision Marketing Platform"
+  },
+  "software": {
+    "product": {
+      "btn": "Consulting and Cooperation",
+      "content1": "The products are distributed at home and abroad, and currently have more than <span class='hl'>10</span> mobile products with a total download volume of more than two million. The users cover more than <span class='hl'>100</span> countries and regions and <span class='hl'>5</span> mainstream language versions, most of which come from overseas markets mainly in Europe and America.",
+      "content2": "Products include a series of mobile phone tool applications, such as <span class='hl'>CLEAN TOOL</span>, <span class='hl'>CAMERAL</span>, <span class='hl'>PHOTO EDITOR</span>, etc., to provide more efficient, convenient and personalized mobile phone control experience for global users.",
+      "dialog": {
+        "phone": "Phone: ",
+        "title": "Business cooperation contact"
+      },
+      "title": "JODO Products"
+    },
+    "subTitle": "Provide users with various tool application products and leisure and entertainment products",
+    "title": "software service"
+  },
+  "game": {
+    "sectionTitle": "Game introduction",
+    "subTitle": "JODO plays with the world",
+    "title": "Game products",
+    "btnText": "Explore more",
+    "gameTypes": {
+      "type1": "R&D games",
+      "type2": "Release game"
+    }
+  },
+  "enterprise": {
+    "list": {
+      "item1": {
+        "desc": "Financial standardization services, tax planning services, company registration services, tax accounting services, business registration services, etc.",
+        "name": "Taxation services"
+      },
+      "item2": {
+        "desc": "Provide one-stop part-time outsourcing services, recruitment, interviews, training, management one-step solution, let business owners worry about tax accounting services, business registration services, etc.",
+        "name": "Human services"
+      },
+      "item3": {
+        "desc": "Essential for overseas companies, localization of translation, cultural localization optimized for the global market, providing localized translation, KOL promotion, product localization suggestions and other services",
+        "name": "translation service"
+      },
+      "item4": {
+        "desc": "Customized personalized employment program to meet your diverse and flexible employment needs, combined with tax planning, to minimize labor costs",
+        "name": "Project outsourcing"
+      },
+      "item5": {
+        "desc": "Crowdsourcing of online promotion tasks is provided, and tens of millions of users let you realize the realization of online promotion tasks",
+        "name": "Task crowdsourcing"
+      },
+      "item6": {
+        "desc": "Posting positions on the platform can quickly recruit to the post while providing a wealth of talent choices",
+        "name": "Part-time service"
+      },
+      "item7": {
+        "desc": "Develop personalized enterprise training services to maximize the potential of employees and maximize the benefits of the enterprise",
+        "name": "Training Services"
+      },
+      "item8": {
+        "desc": "Through internal management position conversion, reduce corporate costs and increase personal income",
+        "name": "Flexible labor generation management"
+      },
+      "item9": {
+        "desc": "Develop enterprise project declaration plan, implement and promote declaration approval, assist enterprises to obtain government preferential treatment",
+        "name": "Government project declaration"
+      }
+    },
+    "subTitle": "Provide one-stop enterprise life cycle services for entrepreneurial teams and enterprises to achieve resource sharing and mutual benefit",
+    "title": "Corporate Services"
+  },
+  "news": {
+    "subTitle": "Let's explore more",
+    "btn": "load more",
+    "empty": "No News",
+    "tabs": {
+      "tab1": "Activity Info",
+      "tab2": "Company Info",
+      "tab3": "Training Info"
+    }
+  },
+  "jobs": {
+    "employ": {
+      "title": "social recruitment"
+    },
+    "plan": {
+      "title": "training program"
+    },
+    "subTitle": "We will be great together",
+    "title": "Join Us",
+    "training": {
+      "title": "Training & Development"
+    },
+    "welfare": {
+      "title": "Welfare & cultural life"
+    }
+  },
+  "campus": {
+    "jobs": {
+      "title": "Campus Recruiting"
+    },
+    "process": {
+      "list": {
+        "text1": "Apply Online",
+        "text2": "Attend Online Career Talk",
+        "text3": "Online test",
+        "text4": "Interview",
+        "text5": "Contract with JODO"
+      },
+      "title": "School recruitment process"
+    },
+    "subTitle": "Come to JODO, discover your passion and explore a better future together",
+    "training": {
+      "section": {
+        "section1": {
+          "title": "Mentoring"
+        },
+        "section2": {
+          "title": "Personal development plan"
+        },
+        "section3": {
+          "title": "Xiaozhuo Student Training Program"
+        }
+      },
+      "subTitle": "Your growth is supported by us",
+      "title": "Training & Development"
+    },
+    "video": {
+      "title": "Found a different JODO"
+    },
+    "welfare": {
+      "subTitle": "At JODO, working happily is not difficult",
+      "title": "Welfare & cultural life"
+    }
+  },
+  "contact": {
+    "address": "company address",
+    "addressDetail1": "7th Floor, Yajue Business Building, 59 Jianzhong Road, Keyun Road, Software Park, Tianhe District, Guangzhou",
+    "addressDetail2": "Room 1001, Building 1, No. 28, Qinglan Street, Xiaoguwei Street, Panyu District, Guangzhou",
+    "contactWay": "Contact information",
+    "email": "mailbox",
+    "getAddress": "Get geographic location",
+    "phone": "Phone",
+    "subTitle": "Let's explore more",
+    "title": "contact us",
+    "wechat": "Official WeChat account",
+    "business": "Business",
+    "game": "Game"
+  },
+  "ecommerce": {
+    "product": {
+      "btn": "Consulting cooperation",
+      "content1": "The Premium Membership Card of Black Gold Card Combines All the <span class='hl'>Discounts and Exclusive Benefits</span> on Popular E-commerce Platforms. The Premium Privileges Range from Daily Shopping to Transportation, Covers Every Aspect of Daily Life. We Provide our Members with More than <span class='hl'>300 Privileges</span> from Multiple Famous Brands.",
+      "dialog": {
+        "phone": "phone:",
+        "title": "Business Cooperation Contact"
+      },
+      "title": "Black Gold Card"
+    },
+    "subTitle": "Motivated by a Desire to Serve Customers with High-cost Performance Products and an One-stop Experience.",
+    "title": "E-commerce APP"
+  }
+}
