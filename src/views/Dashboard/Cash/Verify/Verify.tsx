@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, Form, Input, message, Table, Pagination, Popconfirm } from 'antd';
 import { CashStatusMap } from '../config';
@@ -19,7 +19,20 @@ const CashVerify: React.FC = props => {
 
   const onClickResolve = async (item: any) => {}
 
-  const onClickReject = async (item: any) => {}
+  const onClickReject = async (item: any) => {
+    if (!item) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await WealthUserApi.rejectUserCashRecord({ id: item.id });
+      message.success('已拒绝');
+    } catch (e) {
+      console.error('[onClickReject]', e);
+      message.error('操作失败：' + e);
+    }
+    getList(form.getFieldsValue());
+  }
 
   const onPageChange = (page: number) => {
     setPageNumber(page);
@@ -60,6 +73,11 @@ const CashVerify: React.FC = props => {
     setLoading(false);
   }
 
+  useEffect(() => {
+    getList({});
+    // eslint-disable-next-line
+  }, [])
+
   return (
     <main className="">
       <Helmet>
@@ -90,6 +108,7 @@ const CashVerify: React.FC = props => {
           <Button
             type="primary"
             htmlType="submit"
+            disabled={loading}
           >
             查询
           </Button>

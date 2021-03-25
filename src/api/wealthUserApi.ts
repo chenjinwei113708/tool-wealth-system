@@ -41,4 +41,14 @@ export default {
       data,
     });
   },
+
+  rejectUserCashRecord (data: {
+    id: number,
+  }) {
+    return axios({
+      url: '/api/wealth/user/cash/withdraw/reject',
+      method: 'POST',
+      data,
+    });
+  },
 }

@@ -77,7 +77,7 @@ const axiosThen = function (response: AxiosResponse) {
         resData,
       });
       return Promise.resolve(dataTransform(false, null, {
-        msg: resData.msg,
+        msg: resData.msg || resData.message || resData.state?.msg,
         code: resData.code ?? resData.state?.code,
       }));
     }
