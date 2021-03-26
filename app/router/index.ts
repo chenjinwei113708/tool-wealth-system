@@ -21,6 +21,7 @@ router.post('/api/wealth/user/gold', ctrl.serverProxy.getUserGold);
 router.post('/api/wealth/user/gold/update', ctrl.serverProxy.updateUserGold);
 router.post('/api/wealth/user/cash', ctrl.serverProxy.getUserCashRecord);
 router.post('/api/wealth/user/cash/withdraw/reject', ctrl.serverProxy.rejectCashWithdraw);
+router.post('/api/wealth/user/cash/withdraw/resolve', ctrl.serverProxy.resolvetCashWithdraw);
 
 // 放在最后，404
 router.all('/api/*', ctrl.system.notFound);

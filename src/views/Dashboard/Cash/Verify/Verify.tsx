@@ -17,7 +17,20 @@ const CashVerify: React.FC = props => {
 
   const [form] = Form.useForm();
 
-  const onClickResolve = async (item: any) => {}
+  const onClickResolve = async (item: any) => {
+    if (!item) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await WealthUserApi.resolveUserCashRecord({ id: item.id });
+      message.success('已通过');
+    } catch (e) {
+      console.error('[onClickResolve]', e);
+      message.error('操作失败：' + e);
+    }
+    getList(form.getFieldsValue());
+  }
 
   const onClickReject = async (item: any) => {
     if (!item) {

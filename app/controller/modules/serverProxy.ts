@@ -82,4 +82,20 @@ export default {
     });
     ctx.resHandler(resData);
   },
+
+  async resolvetCashWithdraw (ctx: Context) {
+    const { id } = ctx.request.body;
+    if (id - 0 !== id - 0) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: '参数有误',
+      });
+    }
+
+    const resData = await http({
+      url: `${serverHost}/review/access/${id}`,
+      method: 'POST',
+    });
+    ctx.resHandler(resData);
+  },
 }

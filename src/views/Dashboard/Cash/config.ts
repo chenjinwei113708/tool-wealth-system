@@ -10,6 +10,10 @@ export const CashStatusTypes = [
   {
     value: 2,
     label: '审核失败',
+  },
+  {
+    value: 3,
+    label: '提现成功',
   }
 ]
 

@@ -42,8 +42,18 @@ export default {
     });
   },
 
+  resolveUserCashRecord (data: {
+    id: number | string,
+  }) {
+    return axios({
+      url: '/api/wealth/user/cash/withdraw/resolve',
+      method: 'POST',
+      data,
+    });
+  },
+
   rejectUserCashRecord (data: {
-    id: number,
+    id: number | string,
   }) {
     return axios({
       url: '/api/wealth/user/cash/withdraw/reject',
