@@ -9,8 +9,8 @@ module.exports = {
     host: '10.10.15.61',
     port: 3306,
     user: 'root',
-    password: '123456',
-    database: 'jodo'
+    password: '',
+    database: ''
   },
   NODE_ENV: 'development'
 };

@@ -1551,6 +1551,11 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.12.36.tgz?cache=0&sync_timestamp=1587158411113&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.12.36.tgz#162c8c2a2e659da480049df0e19ae128ad3a1527"
   integrity sha1-FiyMKi5lnaSABJ3w4ZrhKK06FSc=
 
+"@types/node@^14.14.37":
+  version "14.14.37"
+  resolved "https://registry.npmjs.org/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
+  integrity sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==
+
 "@types/optimize-css-assets-webpack-plugin@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npm.taobao.org/@types/optimize-css-assets-webpack-plugin/download/@types/optimize-css-assets-webpack-plugin-5.0.1.tgz#1f437ef9ef937b393687a8819be2d2fddc03b069"

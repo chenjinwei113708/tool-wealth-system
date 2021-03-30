@@ -1,29 +1,27 @@
 <template>
   <div class="v_layout">
-    <v-header />
-    <div class="header_placeholder"/>
-    <!-- <div class="v_header">
-      <nuxt-link :to="localePath('/')" tag="a">首页</nuxt-link>
-      <nuxt-link :to="localePath('/about')" tag="a">关于</nuxt-link>
-    </div> -->
+    <!-- <v-header /> -->
+    <!-- <div class="header_placeholder"/> -->
+
     <nuxt class="v_main" />
     <client-only>
       <vue-to-top class="jodo_top" title="返回顶部" type="4" />
     </client-only>
-    <v-footer />
+
+    <!-- <v-footer /> -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import VHeader from '@/components/Header.vue';
-import VFooter from '@/components/Footer.vue';
+// import VHeader from '@/components/Header.vue';
+// import VFooter from '@/components/Footer.vue';
 
 export default Vue.extend({
   name: 'layout',
   components: {
-    VHeader,
-    VFooter,
+    // VHeader,
+    // VFooter,
   },
 
   head() {
@@ -99,19 +97,19 @@ html, body, #__nuxt, #__layout, .v_layout {
   opacity: 0;
 }
 
-@media only screen and (max-width: 750px) {
-  .v_layout {
-    $design-width: 750px;
-    @import '@/assets/scss/mixin.scss';
+// @media only screen and (max-width: 750px) {
+//   .v_layout {
+//     $design-width: 750px;
+//     @import '@/assets/scss/mixin.scss';
 
-    .header_placeholder {
-      height: px2rem(90px);
-    }
-  }
-}
+//     .header_placeholder {
+//       height: px2rem(90px);
+//     }
+//   }
+// }
 
 ::-webkit-scrollbar-thumb {
-  background: #097dea;
+  background: #fff;
   // background: #a1a3a9;
   border-radius: 6px;
   -webkit-border-radius: 6px;
