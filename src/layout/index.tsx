@@ -65,7 +65,7 @@ const VLayout: React.FC = props => {
   }
 
   const renderMenu = (routes: IRoute[]) => (
-    routes.map(route => (
+    routes.filter(route => !route.hidden).map(route => (
       route.children 
         ? (
           <SubMenu

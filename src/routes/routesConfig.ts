@@ -29,6 +29,14 @@ export const MainRoutes: IRoute[] = [
     },
     children: [
       {
+        hidden: true,
+        exact: true,
+        name: 'user-index',
+        title: 'user-index',
+        path: '/user',
+        redirect: '/user/gold_search',
+      },
+      {
         name: 'user-gold-search',
         title: '金币查询',
         path: '/user/gold_search',
@@ -51,6 +59,14 @@ export const MainRoutes: IRoute[] = [
       icon: TagsOutlined,
     },
     children: [
+      {
+        hidden: true,
+        exact: true,
+        name: 'cash-index',
+        title: 'cash-index',
+        path: '/cash',
+        redirect: '/cash/verify',
+      },
       {
         name: 'cash-verify',
         title: '提现审核',
@@ -113,6 +129,14 @@ const Routes: IRoute[] = [
     path: '/',
     component: lazy(() => import(/* webpackChunkName: "layout" */ '../layout')),
     children: [
+      {
+        hidden: true,
+        exact: true,
+        name: 'home',
+        title: 'home',
+        path: '/',
+        component: lazy(() => import(/* webpackChunkName: "home" */ '../views/Dashboard/Home')),
+      },
       ...MainRoutes,
       {
         hidden: true,
