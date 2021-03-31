@@ -3,6 +3,7 @@ export default {
     port: 24000,
 
     serverHost: 'http://10.10.10.250:8080',
+    ssoCenter: 'http://10.10.10.155:7012',
   },
 
   database: {

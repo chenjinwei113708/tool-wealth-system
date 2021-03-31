@@ -4,8 +4,10 @@ import { ParameterizedContext, Next } from 'koa';
 import Util from '../util/util';
 import { CookiesName, jwtSecret } from '@/config/common';
 import log4js from '../util/log4js';
+import Conf from 'conf';
 
 const logger = log4js('tokenAuth');
+const { ssoCenter } = Conf.network;
 
 export default {
   /**
@@ -15,6 +17,16 @@ export default {
    */
   async auth(ctx: ParameterizedContext, next: Next) {
     if (ctx.url.indexOf('/api/login') === 0 || ctx.url.indexOf('/api/logout') === 0 || ctx.url.indexOf('/api/') !== 0) {
+      return next();
+    }
+
+    if (ctx.ssoLogin && ctx.ssoInfo) {
+      ctx.username = ctx.ssoInfo.username;
+      if (!ctx.cookies.get(CookiesName.USERNAME)) {
+        ctx.cookies.set(CookiesName.USERNAME, ctx.ssoInfo.username, {
+          expires: new Date(ctx.ssoInfo.expireAt)
+        });
+      }
       return next();
     }
 
@@ -41,6 +53,9 @@ export default {
         });
         ctx.resHandler({
           isSuccess: false,
+          data: {
+            ssoCenter,
+          },
           msg: 'TOKEN AUTH ERROR'
         }, 203);
       } else {
@@ -65,6 +80,9 @@ export default {
       });
       ctx.resHandler({
         isSuccess: false,
+        data: {
+          ssoCenter,
+        },
         msg: '请登录'
       }, 203);
     }

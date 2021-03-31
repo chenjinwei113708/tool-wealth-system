@@ -5,6 +5,8 @@ const router = new Router();
 
 router.all('/api/test', ctrl.system.test);
 
+router.all('/api/*', ctrl.users.loginAuthMid);
+
 // 用户账户相关
 router.post('/api/login', ctrl.users.login);
 router.post('/api/logout', ctrl.users.logout);

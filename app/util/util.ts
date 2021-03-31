@@ -2,14 +2,14 @@
  * @Author: Willie Chen
  * @LastEditors: Willie Chen
  * @Date: 2019-09-30 16:12:38
- * @LastEditTime: 2021-03-22 17:19:10
+ * @LastEditTime: 2021-03-31 11:18:11
  * @Description: 工具集
  */
 
 import { ParameterizedContext } from 'koa';
 import jwt from 'jsonwebtoken'; // 用来创建和确认用户信息摘要
 import md5 from 'md5';
-import { jwtSecret } from '@/config/common';
+import { jwtPublicKey, jwtSecret } from '@/config/common';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -75,10 +75,18 @@ export default {
       ), {} as {[key: string]: any});
   },
 
-  setToken(userInfo: any) {
+  setToken(userInfo: any, expiresIn: string | number = '15d') {
     const token = jwt.sign({ userInfo: userInfo }, jwtSecret, {
-      expiresIn: '15d'
+      expiresIn,
     });
     return token;
+  },
+
+  decodeSSOToken (token: string) {
+    if (!token) {
+      throw new jwt.JsonWebTokenError('token 为空');
+    }
+    const decode = jwt.verify(token, jwtPublicKey, { algorithms: ['RS256'] });
+    return decode as any;
   },
 }

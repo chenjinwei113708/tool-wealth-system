@@ -9,6 +9,7 @@ import LogMiddleware from './middleware/loggerMiddleware';
 import auth from './middleware/tokenAuth';
 import extendContext from './middleware/extendContext';
 import errMiddleware from './middleware/error';
+import ssoMiddleware from './middleware/sso';
 
 const app = new Koa();
 const port = config.network.port;
@@ -24,6 +25,7 @@ app.use(errMiddleware);
 
 app.use(LogMiddleware);
 
+app.use(ssoMiddleware());
 app.use(auth.auth);
 
 app.use(router.routes());

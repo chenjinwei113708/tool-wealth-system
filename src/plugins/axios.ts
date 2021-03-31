@@ -58,7 +58,12 @@ const handleResponse = function (res: AxiosResponse<any>) {
       return Promise.resolve(res.data);
     case 203:
       message.error('请登录');
+      const ssoCenter = res.data?.data?.ssoCenter;
       const originPath = window.location.pathname + window.location.search;
+      if (ssoCenter) {
+        window.location.href = `${ssoCenter}?server=${encodeURIComponent(window.location.href)}`
+        return Promise.reject(new ErrorProcessor(res.status));;
+      }
       history.push(originPath === '/' ? '/login' : `/login?redirect=${encodeURIComponent(originPath)}`);
       return Promise.reject(new ErrorProcessor(res.status));
     default:

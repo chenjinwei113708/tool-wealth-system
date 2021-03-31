@@ -15,10 +15,15 @@ export default {
     });
   },
 
-  getInfo () {
+  getInfo (data?: { token?: string, username?: string }) {
     return axios({
       url: '/api/user/info',
       method: 'POST',
+      data,
+      headers: {
+        'sso-username': data?.username,
+        'sso-token': data?.token,
+      }
     });
   },
 

@@ -2,11 +2,13 @@ import Schemas from '../schemas';
 import Util from 'util/util';
 import log4js from 'util/log4js';
 import http from 'lib/axios';
+import { CookiesName } from '@/config/common';
+import Conf from 'conf';
 
 import { Next, ParameterizedContext as Context } from 'koa';
-import { CookiesName } from '@/config/common';
 
 const logger = log4js('users');
+const { ssoCenter } = Conf.network;
 
 export default {
   async login (ctx: Context) {
@@ -97,13 +99,40 @@ export default {
     });
   },
 
+  async loginAuthMid (ctx: Context, next: Next) {
+    if (['/api/login', '/api/logout'].includes(ctx.url)) {
+      return next();
+    }
+
+    const username = ctx.username;
+    if (!username) {
+      return Util.resHandler(ctx, {
+        isSuccess: false,
+        msg: '请登录',
+        data: {
+          ssoCenter,
+        }
+      }, 203);
+    }
+
+    // 已登录
+    const userItem = await Schemas.users.getByUsername(username);
+    if (!userItem) {
+      return ctx.resHandler({
+        isSuccess: false,
+        msg: '无登录权限，请联系管理员',
+      });
+    }
+    return next();
+  },
+
   async getUserInfo (ctx: Context) {
-    const username = ctx.cookies.get(CookiesName.USERNAME);
+    const username = ctx.username;
     if (!username) {
       return ctx.resHandler({
         isSuccess: false,
         msg: 'auth error',
-      });
+      }, 203);
     }
 
     const userItem = await Schemas.users.getByUsername(username);
@@ -130,13 +159,13 @@ export default {
       return ctx.resHandler({
         isSuccess: false,
         msg: 'auth error',
-      });
+      }, 203);
     }
     const isAdmin = await Schemas.common.isAdmin(username);
     if (!isAdmin) {
       return ctx.resHandler({
         isSuccess: false,
-        msg: 'auth error',
+        msg: '权限不足，请联系管理员',
       }, 403);
     }
     return next();
