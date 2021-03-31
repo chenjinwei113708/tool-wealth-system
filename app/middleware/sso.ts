@@ -16,6 +16,15 @@ ltj0k2jirGadwGCLZQIDAQAB
 -----END PUBLIC KEY-----
 `;
 
+export const clearSSOStatus = (ctx: ParameterizedContext) => {
+  ctx.cookies.set('sso-token', '', {
+    expires: new Date(Date.now() - 1000)
+  });
+  ctx.cookies.set('sso-username', '', {
+    expires: new Date(Date.now() - 1000)
+  });
+}
+
 export default function SSOMid (config?: SSOConfig) {
   const whiteList = config?.whiteList || defaultWhiteList;
 

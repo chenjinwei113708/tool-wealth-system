@@ -3,6 +3,7 @@ import Util from 'util/util';
 import log4js from 'util/log4js';
 import http from 'lib/axios';
 import { CookiesName } from '@/config/common';
+import { clearSSOStatus } from '@/middleware/sso';
 import Conf from 'conf';
 
 import { Next, ParameterizedContext as Context } from 'koa';
@@ -89,6 +90,8 @@ export default {
     ctx.cookies.set(CookiesName.TOKEN, '', {
       expires: new Date(Date.now() - 1000)
     });
+
+    clearSSOStatus(ctx);
 
     Util.resHandler(ctx, {
       isSuccess: true,
