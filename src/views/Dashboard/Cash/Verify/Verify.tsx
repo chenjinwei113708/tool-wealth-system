@@ -170,7 +170,15 @@ const CashVerify: React.FC = props => {
           )}
         />
         <Column title="提现金币数" dataIndex="frozenCash" key="frozenCash" width="100px" />
-        <Column title="提现金额" dataIndex="reviewCash" key="reviewCash" width="130px" />
+        <Column 
+          title="提现金额/元" 
+          dataIndex="reviewCash" 
+          key="reviewCash"
+          width="130px" 
+          render={(text) => (
+            text / 100 || 0
+          )}
+        />
         <Column title="创建时间" dataIndex="createTime" key="createTime" width="175px" />
         <Column title="修改时间" dataIndex="updateTime" key="updateTime" width="175px" />
         <Column 
