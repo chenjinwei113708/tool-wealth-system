@@ -2,7 +2,7 @@
  * @Author: Willie Chen
  * @LastEditors: Willie Chen
  * @Date: 2019-09-30 16:12:38
- * @LastEditTime: 2021-03-31 11:18:11
+ * @LastEditTime: 2021-04-02 17:06:55
  * @Description: 工具集
  */
 
@@ -88,5 +88,13 @@ export default {
     }
     const decode = jwt.verify(token, jwtPublicKey, { algorithms: ['RS256'] });
     return decode as any;
+  },
+
+  createServerTmpToken (data: any, publicKey: string, expiresIn: string | number = '1m') {
+    const token = jwt.sign(data, publicKey, {
+      expiresIn,
+      algorithm: 'RS256',
+    });
+    return token;
   },
 }
