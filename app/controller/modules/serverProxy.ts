@@ -31,7 +31,10 @@ const AssistFn = {
       }
     }
 
-    data = JSON.stringify(sortObj(data));
+    data = JSON.stringify(sortObj({
+      ...data,
+      secret: '2134jasdklf9#sd',
+    }));
     const sign = md5(data);
     return {
       'admin-authentication': sign,
