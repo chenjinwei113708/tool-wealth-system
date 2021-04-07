@@ -33,8 +33,9 @@ const AssistFn = {
 
     data = JSON.stringify(sortObj({
       ...data,
-      secret: '2134jasdklf9#sd',
-    }));
+      // secret: '2134jasdklf9#sd',
+    })) + `&secret=2134jasdklf9#sd`;
+    console.log('🚀 ~ file: serverProxy.ts ~ line 38 ~ createProxyHeader ~ data', data);
     const sign = md5(data);
     return {
       'admin-authentication': sign,
@@ -108,7 +109,7 @@ export default {
 
   async rejectCashWithdraw (ctx: Context) {
     const { id } = ctx.request.body;
-    if (id - 0 !== id - 0) {
+    if (!id) {
       return ctx.resHandler({
         isSuccess: false,
         msg: '参数有误',
@@ -120,7 +121,7 @@ export default {
     };
 
     const resData = await http({
-      url: `${serverHost}/review/refuse/${id}`,
+      url: `${serverHost}/review/refuse`,
       headers: AssistFn.createProxyHeader(reqData),
       method: 'POST',
       data: reqData
@@ -130,7 +131,7 @@ export default {
 
   async resolvetCashWithdraw (ctx: Context) {
     const { id } = ctx.request.body;
-    if (id - 0 !== id - 0) {
+    if (!id) {
       return ctx.resHandler({
         isSuccess: false,
         msg: '参数有误',
@@ -142,7 +143,7 @@ export default {
     };
 
     const resData = await http({
-      url: `${serverHost}/review/access/${id}`,
+      url: `${serverHost}/review/access`,
       headers: AssistFn.createProxyHeader(reqData),
       method: 'POST',
       data: reqData,

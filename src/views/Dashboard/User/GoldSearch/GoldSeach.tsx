@@ -20,13 +20,13 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
 
   const [form] = Form.useForm();
 
-  const onClickEdit = (item: any) => {
-    if (!item) {
-      return;
-    }
-    setEditData(item);
-    setShowEditForm(true);
-  }
+  // const onClickEdit = (item: any) => {
+  //   if (!item) {
+  //     return;
+  //   }
+  //   setEditData(item);
+  //   setShowEditForm(true);
+  // }
 
   const onEditFormClose = () => {
     setShowEditForm(false);
@@ -148,7 +148,7 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
         <Column title="累计提现" dataIndex="accumulateReview" key="accumulateReview" width="110px" />
         <Column title="创建时间" dataIndex="createTime" key="createTime" width="175px" />
         <Column title="修改时间" dataIndex="updateTime" key="updateTime" width="175px" />
-        <Column 
+        {/* <Column 
           title="操作" 
           dataIndex="ctrl" 
           key="ctrl" 
@@ -157,7 +157,7 @@ const GoldSeach: React.FC<RouteChildrenProps> = props => {
           render={(value, record) => (<>
             <Button size="small" type="primary" onClick={() => { onClickEdit(record) }}>修改</Button>
           </>)}
-        />
+        /> */}
       </Table>
 
       <div className="paginationDiv">
