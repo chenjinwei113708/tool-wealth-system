@@ -1,0 +1,24 @@
+.v_home {
+  .header_holder {
+    height: px2rem(132px);
+  }
+
+  .banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: px2rem(1182px);
+    line-height: 1;
+    text-align: center;
+    color: #fff;
+    background: center/cover url('/images/home/banner-01.png') no-repeat;
+
+    .title {
+      margin-bottom: px2rem(25px);
+      font-size: px2rem(140px);
+    }
+    .desc {
+      font-size: px2rem(32px);
+    }
+  }
+}

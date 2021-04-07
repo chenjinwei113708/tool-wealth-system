@@ -109,8 +109,7 @@ html, body, #__nuxt, #__layout, .v_layout {
 // }
 
 ::-webkit-scrollbar-thumb {
-  background: #fff;
-  // background: #a1a3a9;
+  background: #a1a3a9;
   border-radius: 6px;
   -webkit-border-radius: 6px;
 }

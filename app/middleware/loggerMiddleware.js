@@ -9,8 +9,7 @@ module.exports = async function(ctx, next) {
   if (ctx.path.indexOf('/static/') === 0 || ctx.path.indexOf('/_nuxt/') === 0 || 
     ctx.path.indexOf('/api/test') === 0 || ctx.path.indexOf('/images/') === 0 ||
     ctx.path.indexOf('/lib/') === 0 || ctx.path.indexOf('/favicon.ico') === 0 ||
-    ctx.path.indexOf('/rem.js') === 0 || ctx.path.indexOf('/member/uploadfile') === 0 ||
-    ctx.path.indexOf('/dayrui/statics/') === 0
+    ctx.path.indexOf('/rem.js') === 0 || ctx.path.indexOf('/__webpack_hmr') === 0
   ) {
     logger.debug(`request: ${ctx.method} ${ctx.path}`);
     return next();

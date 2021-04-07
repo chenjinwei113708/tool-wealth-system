@@ -9,7 +9,7 @@ module.exports = {
   */
   head: {
     // title: process.env.npm_package_name || '',
-    title: '大吉工作室-广州天之梦网络科技有限公司',
+    title: '大吉工作室 - 广州天之梦网络科技有限公司',
     htmlAttrs: {
       lang: 'zh-CN',
     },

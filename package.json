@@ -6,12 +6,12 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon app/index.js",
-    "build": "nuxt build",
+    "buildssr": "nuxt build",
     "start": "cross-env NODE_ENV=production node app/index.js",
     "ser": "npm run build && npm run start",
     "prod": "npm run start",
     "prod:local": "cross-env HOST=0.0.0.0 NODE_ENV=production node app/index.js",
-    "generate": "nuxt generate"
+    "build": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.7",
