@@ -39,9 +39,9 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Source Sans Pro', 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
-html, body, #__nuxt, #__layout, .v_layout {
-  height: 100%;
-}
+// html, body, #__nuxt, #__layout, .v_layout {
+//   height: 100%;
+// }
 
 .v_layout {
   // display: flex;
