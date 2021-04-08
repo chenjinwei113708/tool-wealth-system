@@ -14,6 +14,7 @@
       <section class="sec sec_moment">
         <h2 class="sec_title">
           <img src="../assets/images/home/dongtai01.png" class="sec_title_img">
+          动态
         </h2>
 
         <section class="moment_content_wrap">
@@ -40,6 +41,7 @@
       <section class="sec sec_game">
         <h2 class="sec_title">
           <img src="../assets/images/home/youxi01.png" class="sec_title_img">
+          游戏
         </h2>
 
         <section class="game_content_wrap">
@@ -57,6 +59,37 @@
         </section>
       </section>
     </main>
+
+    <section class="about">
+      <h2 class="sec_title">
+        <img src="../assets/images/home/guanyuwomen01.png" class="sec_title_img">
+        关于我们
+      </h2>
+      <article class="about_art">
+        <h3 class="a_title">公司简介</h3>
+        <p class="a_text">
+          天之梦成立于2019年，由一群热爱游戏的年轻人组成。<br>
+          旗下的大吉工作室，站在玩家的立场上，旨在研发出让玩家所喜欢热爱的精品独立手游，<br>
+          维系玩家体验一直都是大吉工作室的使命。<br>
+          旗下的大力发行，立志于为国内外的独立开发者提供优质的发行服务。我们能提供一流的便携发行服务；<br>
+          提供针对性的开发建议;联系发行去到进行上架；<br>
+          提供优质的宣传渠道。让更多的独立开发者能够迅速的实现产品的落地也是大力发行的宗旨。
+        </p>
+      </article>
+    </section>
+
+    <section class="contact">
+      <h2 class="sec_title">
+        <img src="../assets/images/home/lianxiwomen01.png" class="sec_title_img">
+        联系我们
+      </h2>
+
+      <article class="contact_art">
+        <p class="contact_text">
+          商务洽谈/邮件：<a href="mailto:tianzhimeng@qq.com" class="contact_link">tianzhimeng@qq.com</a>
+        </p>
+      </article>
+    </section>
   </main>
 </template>
 

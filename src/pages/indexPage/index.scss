@@ -136,4 +136,60 @@
       }
     }
   }
+
+  .about {
+    overflow: hidden;
+    height: px2rem(901px);
+    padding: 0 px2rem(135px);
+    background: center/cover url('/images/home/03bg.png') no-repeat;
+
+    .sec_title {
+      margin-top: px2rem(90px);
+    }
+
+    .about_art {
+      // margin-top: px2rem(70px);
+      color: #fff;
+      text-align: center;
+
+      .a_title {
+        margin-bottom: px2rem(80px);
+        line-height: 1;
+        font-size: px2rem(63px);
+      }
+      .a_text {
+        line-height: 1.5;
+        font-size: px2rem(30px);
+      }
+    }
+  }
+
+  .contact {
+    overflow: hidden;
+    height: px2rem(537px);
+    padding: 0 px2rem(135px);
+    background: center/cover url('/images/home/04bg.png') no-repeat;
+
+    .sec_title {
+      margin-top: px2rem(130px);
+      margin-bottom: px2rem(90px);
+    }
+
+    .contact_art {
+      color: #fff;
+      text-align: center;
+    }
+    .contact_text {
+      line-height: 1;
+      font-size: px2rem(34px);
+    }
+    .contact_link {
+      color: #fff;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 20%;
+      }
+    }
+  }
 }
