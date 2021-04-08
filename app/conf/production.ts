@@ -2,7 +2,7 @@ export default {
   network: {
     port: 24000,
 
-    serverHost: 'http://10.10.10.250:8080',
+    serverHost: 'http://tool-cash-back-service-alihktest.k8sstudio.com',
     ssoCenter: 'http://10.10.10.155:7012',
   },
 

@@ -145,7 +145,7 @@ const CashVerify: React.FC = props => {
         <Column title="应用名称" dataIndex="appname" key="appname" width="180px" />
         <Column title="包名" dataIndex="pn" key="pn" width="160px" />
         <Column title="cgi" dataIndex="cgi" key="cgi" width="110px" />
-        <Column title="idfa" dataIndex="idfa" key="idfa" width="180px" />
+        <Column title="idfa" dataIndex="idfa" key="idfa" width="160px" />
         <Column title="puid" dataIndex="puid" key="puid" width="140px" />
         <Column 
           title="操作系统" 
@@ -178,6 +178,33 @@ const CashVerify: React.FC = props => {
           render={(text) => (
             text / 100 || 0
           )}
+        />
+        <Column 
+          title="商户订单号" 
+          dataIndex="partnerTradeNo" 
+          key="partnerTradeNo" 
+          width="160px" 
+          render={ value => 
+            <p style={{ width: 160, wordBreak: 'break-all' }} title={value}>{value}</p> 
+          } 
+        />
+        <Column 
+          title="微信付款单号" 
+          dataIndex="paymentNo" 
+          key="paymentNo" 
+          width="160px" 
+          render={ value => 
+            <p style={{ width: 160, wordBreak: 'break-all' }} title={value}>{value}</p> 
+          } 
+        />
+        <Column 
+          title="支付时间" 
+          dataIndex="paymentTime" 
+          key="paymentTime" 
+          width="170px" 
+          render={ value => 
+            <p className="ellipsis" style={{ width: 170 }} title={value}>{value}</p> 
+          } 
         />
         <Column title="创建时间" dataIndex="createTime" key="createTime" width="175px" />
         <Column title="修改时间" dataIndex="updateTime" key="updateTime" width="175px" />
