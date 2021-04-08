@@ -5,14 +5,14 @@
 
     <section class="banner">
       <div class="banner_content">
-        <h2 class="title">智械纪年</h2>
-        <p class="desc">当前画面不代表最终品质，敬请期待</p>
+        <h2 class="title" need-animation>智械纪年</h2>
+        <p class="desc" need-animation>当前画面不代表最终品质，敬请期待</p>
       </div>
     </section>
 
     <main class="main">
-      <section class="sec sec_moment">
-        <h2 class="sec_title">
+      <section class="sec sec_moment" id="moment">
+        <h2 class="sec_title" need-animation>
           <img src="../assets/images/home/dongtai01.png" class="sec_title_img">
           动态
         </h2>
@@ -23,6 +23,7 @@
             v-for="(item, index) in momentList"
             :key="item.title"
             :class="index & 1 ? 'reverse' : ''"
+            need-animation
           >
             <img :src="item.imgUrl" class="item_img">
             <article class="item_content">
@@ -38,8 +39,8 @@
         </section>
       </section>
 
-      <section class="sec sec_game">
-        <h2 class="sec_title">
+      <section class="sec sec_game" id="game">
+        <h2 class="sec_title" need-animation>
           <img src="../assets/images/home/youxi01.png" class="sec_title_img">
           游戏
         </h2>
@@ -49,6 +50,7 @@
             class="game_item"
             v-for="item in gameList"
             :key="item.title"
+            need-animation
           >
             <div class="item_content">
               <h3 class="item_hd">{{item.title}}</h3>
@@ -60,14 +62,14 @@
       </section>
     </main>
 
-    <section class="about">
-      <h2 class="sec_title">
+    <section class="about" id="about">
+      <h2 class="sec_title" need-animation>
         <img src="../assets/images/home/guanyuwomen01.png" class="sec_title_img">
         关于我们
       </h2>
       <article class="about_art">
-        <h3 class="a_title">公司简介</h3>
-        <p class="a_text">
+        <h3 class="a_title" need-animation>公司简介</h3>
+        <p class="a_text" need-animation>
           天之梦成立于2019年，由一群热爱游戏的年轻人组成。<br>
           旗下的大吉工作室，站在玩家的立场上，旨在研发出让玩家所喜欢热爱的精品独立手游，<br>
           维系玩家体验一直都是大吉工作室的使命。<br>
@@ -78,13 +80,13 @@
       </article>
     </section>
 
-    <section class="contact">
-      <h2 class="sec_title">
+    <section class="contact" id="contact">
+      <h2 class="sec_title" need-animation>
         <img src="../assets/images/home/lianxiwomen01.png" class="sec_title_img">
         联系我们
       </h2>
 
-      <article class="contact_art">
+      <article class="contact_art" need-animation>
         <p class="contact_text">
           商务洽谈/邮件：<a href="mailto:tianzhimeng@qq.com" class="contact_link">tianzhimeng@qq.com</a>
         </p>
@@ -95,6 +97,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { BounceInUp } from '@/util/animation';
 import Header from './indexPage/components/header.vue';
 
 export default Vue.extend({
@@ -158,9 +161,20 @@ export default Vue.extend({
       ]
     }
   },
+
+  mounted () {
+    BounceInUp.init();
+  },
+
+  beforeDestroy () {
+    BounceInUp.destroy();
+  },
+
+
 });
 </script>
 
 <style lang="scss">
+@import '@/assets/scss/animation.scss';
 @import './indexPage/index.scss';
 </style>

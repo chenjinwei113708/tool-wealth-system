@@ -1,7 +1,9 @@
 <template>
   <header class="v_home_header">
     <h1 class="logo h_title">
-      <img src="../../../assets/images/home/logo.png" alt="logo" class="logo_img">
+      <router-link class="h_link" to="/">
+        <img src="../../../assets/images/home/logo.png" alt="logo" class="logo_img">
+      </router-link>
       天之梦
     </h1>
 
@@ -10,8 +12,7 @@
         class="nav_link"
         v-for="item in navList"
         :key="item.name"
-        :href="`#${item.name}`" 
-        @click.prevent
+        :href="`#${item.name}`"
       >
         <img :src="item.textImg" class="nav_link_img">
       </a>
@@ -26,19 +27,19 @@ export default {
       navList: [
         {
           textImg: require('../../../assets/images/home/dongtai01.png'),
-          name: 'dongtai',
+          name: 'moment',
         },
         {
           textImg: require('../../../assets/images/home/youxi01.png'),
-          name: 'youxi',
+          name: 'game',
         },
         {
           textImg: require('../../../assets/images/home/guanyuwomen01.png'),
-          name: 'guanyuwomen',
+          name: 'about',
         },
         {
           textImg: require('../../../assets/images/home/lianxiwomen01.png'),
-          name: 'lianxiwomen',
+          name: 'contact',
         },
       ]
     }
@@ -65,6 +66,7 @@ export default {
     height: px2rem(120px);
     font-size: 16px;
 
+    .h_link,
     .logo_img {
       display: block;
       width: 100%;
