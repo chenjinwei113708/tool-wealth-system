@@ -4,9 +4,9 @@
     <!-- <div class="header_placeholder"/> -->
 
     <nuxt class="v_main" />
-    <client-only>
+    <!-- <client-only>
       <vue-to-top class="jodo_top" title="返回顶部" type="4" />
-    </client-only>
+    </client-only> -->
 
     <!-- <v-footer /> -->
   </div>
@@ -27,7 +27,7 @@ export default Vue.extend({
   head() {
     return {
       htmlAttrs: {
-        lang: this.$i18n.locale || 'en'
+        lang: this.$i18n.locale || 'zh-hans'
       }
     }
   }
@@ -36,7 +36,7 @@ export default Vue.extend({
 
 <style lang="scss">
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  font-family: -apple-system, BlinkMacSystemFont, 'Source Sans Pro', 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 html, body, #__nuxt, #__layout, .v_layout {

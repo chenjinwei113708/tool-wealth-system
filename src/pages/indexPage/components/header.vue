@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss">
 .v_home_header {
+  z-index: 11;
   position: fixed;
   top: 0;
   left: 0;
