@@ -16,7 +16,7 @@
     "pretty": true,
     "module": "commonjs",
     "types" : ["node"],
-    "outDir": "../app-build",
+    "outDir": "../app-js",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
