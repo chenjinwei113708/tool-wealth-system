@@ -9,6 +9,8 @@ import Conf from 'conf';
 const logger = log4js('tokenAuth');
 const { ssoCenter } = Conf.network;
 
+const whiteList = ['/api/test'];
+
 export default {
   /**
    * 用户token验证
@@ -17,6 +19,9 @@ export default {
    */
   async auth(ctx: ParameterizedContext, next: Next) {
     if (ctx.url.indexOf('/api/login') === 0 || ctx.url.indexOf('/api/logout') === 0 || ctx.url.indexOf('/api/') !== 0) {
+      return next();
+    }
+    if (whiteList.includes(ctx.url)) {
       return next();
     }
 
