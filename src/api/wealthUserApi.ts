@@ -14,6 +14,22 @@ export default {
     });
   },
 
+  getUserGoldDetail (data: {
+    pageNumber?: number,
+    pageSize?: number,
+    puid?: string,
+    appname?: string,
+    userId: string,
+    startDate: string,
+    endDate: string,
+  }) {
+    return axios({
+      url: '/api/wealth/user/gold/detail',
+      method: 'POST',
+      data,
+    });
+  },
+
   updateUserGold (data: {
     leftCash?: number,
     frozenCash?: number,

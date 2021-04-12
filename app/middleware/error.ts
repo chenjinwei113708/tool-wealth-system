@@ -10,7 +10,7 @@ export default async function (ctx: ParameterizedContext, next: Next) {
     logger.error(e);
     ctx.resHandler({
       isSuccess: false,
-      msg: e + '',
+      msg: e?.message || e + '',
     }, 500);
   }
 }

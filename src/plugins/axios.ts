@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import history from '@/plugins/history';
 
 export interface IResponse {
@@ -71,6 +71,26 @@ const handleResponse = function (res: AxiosResponse<any>) {
   }
 };
 
+const axiosCatch = function (error: AxiosError) {
+  if (error && error.response) {
+    const response = error.response;
+    const resData = response.data || {};
+    switch (response.status) {
+      // case 400:
+      // case 500:
+      // case 501:
+      // case 502:
+      // case 503:
+      // case 504:
+      //   return Promise.reject(new Error(resData.msg || resData.code || 'request error'));
+      default:
+        return Promise.reject(new Error(resData.msg || 'request error'));
+    }
+  }
+
+  return Promise.reject(error);
+}
+
 instance.interceptors.response.use(response => {
   return handleResponse(response).then((resData: IResponse) => {
     if (resData.isSuccess) {
@@ -81,6 +101,8 @@ instance.interceptors.response.use(response => {
       return Promise.reject(msg);
     }
   });
+}, error => {
+  return axiosCatch(error);
 });
 
 export default (instance as IAxios);

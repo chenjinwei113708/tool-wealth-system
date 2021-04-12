@@ -1,4 +1,5 @@
 import { ParameterizedContext, DefaultContext } from 'koa';
+import Validator from 'better-validator';
 import 'koa';
 import { IResData } from '../util/util';
 
@@ -9,7 +10,9 @@ declare module 'koa' {
     userId: number;
     username: string;
     params: any;
+    validator: ReturnType<typeof Validator.create>;
 
+    checkValidator: () => void;
     resHandler: (this: ParameterizedContext, data: IResData, statusCode?: number, encrypt?: boolean) => void;
   }
 }

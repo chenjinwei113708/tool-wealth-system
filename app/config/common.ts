@@ -19,3 +19,7 @@ NA2iZQbw3NeKW3hGwCqhJLSF1NmRx+KRaTKfOZnvz9IiHlBxuisCm9uvDVpwQlOz
 ltj0k2jirGadwGCLZQIDAQAB
 -----END PUBLIC KEY-----
 `;
+
+export const toolCashServerKey = '2134jasdklf9#sd';
+
+export const dataServerKey = 'HYDH$%JFSNJUHYHKIKdfasdhu';

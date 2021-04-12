@@ -4,10 +4,11 @@ import http from 'lib/axios';
 import md5 from 'md5';
 
 import Conf from 'conf';
+import { toolCashServerKey, dataServerKey } from '@/config/common';
 
 import { Next, ParameterizedContext as Context } from 'koa';
 
-const { serverHost } = Conf.network;
+const { serverHost, dataCodeServerHost } = Conf.network;
 const logger = log4js('serverProxy');
 
 const AssistFn = {
@@ -31,15 +32,16 @@ const AssistFn = {
       }
     }
 
-    data = JSON.stringify(sortObj({
-      ...data,
-      // secret: '2134jasdklf9#sd',
-    })) + `&secret=2134jasdklf9#sd`;
-    console.log('🚀 ~ file: serverProxy.ts ~ line 38 ~ createProxyHeader ~ data', data);
+    data = JSON.stringify(sortObj(data)) + `&secret=${toolCashServerKey}`;
+    logger.debug('serverProxy createProxyHeader ~ data', data);
     const sign = md5(data);
     return {
       'admin-authentication': sign,
     }
+  },
+
+  createDataServerSign (username: string, timestamp: string | number) {
+    return md5(`${username},${timestamp},${dataServerKey}`).toUpperCase();
   },
 }
 
@@ -62,6 +64,42 @@ export default {
       method: 'POST',
       data: reqData
     });
+    ctx.resHandler(resData);
+  },
+
+  async queryUserGoldDetail (ctx: Context) {
+    const { puid = '', appname = '', userId: userid, pageNumber = 1, pageSize = 20, startDate, endDate } = ctx.request.body;
+
+    ctx.validator(startDate).required().isString().isDate();
+    ctx.validator(endDate).required().isString().isDate();
+    ctx.validator(puid).isString();
+    ctx.validator(appname).isString();
+    ctx.validator(userid).required().isString().isEmpty();
+    ctx.checkValidator();
+
+    const ts = Date.now();
+
+    const resData = await http({
+      url: `${dataCodeServerHost}/data/sqlQuery/queryByIdWithSign`,
+      method: 'POST',
+      data: {
+        id: 176,
+        timeStamp: ts,
+        variable: [
+          { key: 'odps_priority', value: '2' },
+          { key: '$startDate', value: startDate },
+          { key: '$endDate', value: endDate },
+          { key: '$puid', value: puid },
+          { key: '$page', value: pageNumber },
+          { key: '$size', value: pageSize },
+          { key: '$appname', value: appname },
+          { key: '$userid', value: userid },
+        ],
+        queryUser: ctx.username,
+        sign: AssistFn.createDataServerSign(ctx.username, ts),
+      }
+    });
+
     ctx.resHandler(resData);
   },
 
