@@ -27,6 +27,7 @@ export default {
       url: '/api/wealth/user/gold/detail',
       method: 'POST',
       data,
+      timeout: 60 * 1000,
     });
   },
 

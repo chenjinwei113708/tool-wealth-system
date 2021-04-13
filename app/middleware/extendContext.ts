@@ -1,6 +1,9 @@
 import{ ParameterizedContext, Next } from 'koa';
 import Validator from 'better-validator';
-import Util, { IResData } from '../util/util';
+import Util, { IResData } from 'util/util';
+import log4js from 'util/log4js';
+
+const logger = log4js('ext mid');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -16,7 +19,8 @@ export default async function (ctx: ParameterizedContext, next: Next) {
   ctx.checkValidator = function () {
     const errors = validator.run();
     if (errors.length) {
-      throw new Error(`参数${errors.map(e => e.value).join(', ')}有误`);
+      logger.error(errors);
+      throw new Error(`参数有误`);
     }
   }
 

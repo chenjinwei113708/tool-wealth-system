@@ -74,14 +74,18 @@ export default {
     ctx.validator(endDate).required().isString().isDate();
     ctx.validator(puid).isString();
     ctx.validator(appname).isString();
-    ctx.validator(userid).required().isString().isEmpty();
+    ctx.validator(userid).required().isString();
     ctx.checkValidator();
 
     const ts = Date.now();
+    const sign = AssistFn.createDataServerSign(ctx.username, ts);
 
     const resData = await http({
-      url: `${dataCodeServerHost}/data/sqlQuery/queryByIdWithSign`,
+      url: `${dataCodeServerHost}/api/s1/redirect/aliyun/data/sqlQuery/queryByIdWithSign`,
       method: 'POST',
+      headers: {
+        apiToken: `1513843088526,apiuser,C474C7F63547BF735E49F6A67096A07A`,
+      },
       data: {
         id: 176,
         timeStamp: ts,
@@ -90,13 +94,13 @@ export default {
           { key: '$startDate', value: startDate },
           { key: '$endDate', value: endDate },
           { key: '$puid', value: puid },
-          { key: '$page', value: pageNumber },
-          { key: '$size', value: pageSize },
+          { key: '$page', value: pageNumber + '' },
+          { key: '$size', value: pageSize + '' },
           { key: '$appname', value: appname },
           { key: '$userid', value: userid },
         ],
         queryUser: ctx.username,
-        sign: AssistFn.createDataServerSign(ctx.username, ts),
+        sign,
       }
     });
 

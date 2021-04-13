@@ -37,7 +37,8 @@ const handleResponse = function (res: AxiosResponse) {
     case 200:
       return Promise.resolve(res.data);
     default:
-      return Promise.reject(new Error('Error'));
+      const resData = res.data || {};
+      return Promise.reject(new Error(resData.msg || resData.message || resData.state?.msg || resData.code || resData.error || resData.state?.code || `Error: ${res.status}`));
   }
 };
 
@@ -72,6 +73,7 @@ const axiosThen = function (response: AxiosResponse) {
       logger.error('[axiosThen]', {
         url: response.config.url,
         method: response.config.method,
+        headers: response.config.headers,
         data: response.config.data,
         query: response.config.params,
         resData,
@@ -81,10 +83,20 @@ const axiosThen = function (response: AxiosResponse) {
         code: resData.code ?? resData.state?.code,
       }));
     }
-  }).catch(e => Promise.resolve(dataTransform(false, null, {
-    msg: (e && e.message) || (e + ''),
-    headers: response.headers || {},
-  })));
+  }).catch(e => {
+    logger.error('[axiosThen catch]', {
+      url: response.config.url,
+      method: response.config.method,
+      headers: response.config.headers,
+      data: response.config.data,
+      query: response.config.params,
+      error: e + '',
+    });
+    return Promise.resolve(dataTransform(false, null, {
+      msg: (e && e.message) || (e + ''),
+      headers: response.headers || {},
+    }))
+  });
 };
 
 // instance.interceptors.request.use(config => {
@@ -118,6 +130,7 @@ instance.interceptors.response.use((response): Promise<any> => {
   logger.error('[interceptors]', {
     url: resConfig.url,
     method: resConfig.method,
+    headers: resConfig.headers,
     data: resConfig.data,
     query: resConfig.params,
     msg: error.response && error.response.data || error,
