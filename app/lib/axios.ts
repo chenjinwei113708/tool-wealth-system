@@ -126,14 +126,14 @@ instance.interceptors.response.use((response): Promise<any> => {
   //     return {};
   //   }
   // })();
-  const resConfig = error?.response?.config || {};
+  const reqConfig = error?.config || {};
   logger.error('[interceptors]', {
-    url: resConfig.url,
-    method: resConfig.method,
-    headers: resConfig.headers,
-    data: resConfig.data,
-    query: resConfig.params,
-    msg: error.response && error.response.data || error,
+    url: reqConfig.url,
+    method: reqConfig.method,
+    headers: reqConfig.headers,
+    data: reqConfig.data,
+    query: reqConfig.params,
+    msg: error.response && error.response.data || error.message || error,
   });
   return axiosCatch(error).catch(e => Promise.resolve(dataTransform(false, null, {
     msg: (e && e.message) || (e + ''),
