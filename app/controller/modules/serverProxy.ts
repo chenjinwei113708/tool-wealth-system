@@ -1,10 +1,11 @@
 import Util from 'util/util';
 import log4js from 'util/log4js';
-import http from 'lib/axios';
+import http, { IResponse } from 'lib/axios';
 import md5 from 'md5';
+import crypto from 'crypto';
 
 import Conf from 'conf';
-import { toolCashServerKey, dataServerKey } from '@/config/common';
+import { toolCashServerKey, dataServerKey, toolCashServerAesConfig } from '@/config/common';
 
 import { Next, ParameterizedContext as Context } from 'koa';
 
@@ -40,6 +41,26 @@ const AssistFn = {
     }
   },
 
+  encodeProxyServerData (data: any) {
+    const cipher = crypto.createCipheriv('aes128', toolCashServerAesConfig.key, toolCashServerAesConfig.iv);
+    const res = cipher.update(JSON.stringify(data), 'utf8', 'base64') + cipher.final('base64');
+    return res;
+  },
+
+  decodeProxyServerData (data: string) {
+    const decipher = crypto.createDecipheriv('aes128', toolCashServerAesConfig.key, toolCashServerAesConfig.iv);
+    const decrypted = decipher.update(data, 'base64', 'utf8') + decipher.final('utf8');
+    return JSON.parse(decrypted);
+  },
+
+  decodeProxyServerResData (resData: IResponse) {
+    resData = {
+      ...resData
+    };
+    resData.data = this.decodeProxyServerData(resData.data);
+    return resData;
+  },
+
   createDataServerSign (username: string, timestamp: string | number) {
     return md5(`${username},${timestamp},${dataServerKey}`).toUpperCase();
   },
@@ -56,15 +77,18 @@ export default {
       },
       pageNumber,
       pageSize,
+      timestamp: Date.now(),
     };
 
     const resData = await http({
       url: `${serverHost}/user/getByPage`,
       headers: AssistFn.createProxyHeader(reqData),
       method: 'POST',
-      data: reqData
+      data: {
+        data: AssistFn.encodeProxyServerData(reqData),
+      }
     });
-    ctx.resHandler(resData);
+    ctx.resHandler(AssistFn.decodeProxyServerResData(resData));
   },
 
   async queryUserGoldDetail (ctx: Context) {
@@ -107,6 +131,9 @@ export default {
     ctx.resHandler(resData);
   },
 
+  /**
+   * 暂时废弃
+   */
   async updateUserGold (ctx: Context) {
     const { id, leftCash, frozenCash, accumulateCash, accumulateReview } = ctx.request.body;
     if (!id) {
@@ -138,15 +165,18 @@ export default {
       },
       pageNumber,
       pageSize,
+      timestamp: Date.now(),
     };
 
     const resData = await http({
       url: `${serverHost}/review/getByPage`,
       headers: AssistFn.createProxyHeader(reqData),
       method: 'POST',
-      data: reqData
+      data: {
+        data: AssistFn.encodeProxyServerData(reqData),
+      }
     });
-    ctx.resHandler(resData);
+    ctx.resHandler(AssistFn.decodeProxyServerResData(resData));
   },
 
   async rejectCashWithdraw (ctx: Context) {
@@ -159,16 +189,19 @@ export default {
     }
 
     const reqData = {
-      id
+      id,
+      timestamp: Date.now(),
     };
 
     const resData = await http({
       url: `${serverHost}/review/refuse`,
       headers: AssistFn.createProxyHeader(reqData),
       method: 'POST',
-      data: reqData
+      data: {
+        data: AssistFn.encodeProxyServerData(reqData),
+      }
     });
-    ctx.resHandler(resData);
+    ctx.resHandler(AssistFn.decodeProxyServerResData(resData));
   },
 
   async resolvetCashWithdraw (ctx: Context) {
@@ -181,15 +214,18 @@ export default {
     }
 
     const reqData = {
-      id
+      id,
+      timestamp: Date.now(),
     };
 
     const resData = await http({
       url: `${serverHost}/review/access`,
       headers: AssistFn.createProxyHeader(reqData),
       method: 'POST',
-      data: reqData,
+      data: {
+        data: AssistFn.encodeProxyServerData(reqData),
+      }
     });
-    ctx.resHandler(resData);
+    ctx.resHandler(AssistFn.decodeProxyServerResData(resData));
   },
 }

@@ -23,3 +23,8 @@ ltj0k2jirGadwGCLZQIDAQAB
 export const toolCashServerKey = '2134jasdklf9#sd';
 
 export const dataServerKey = 'HYDH$%JFSNJUHYHKIKdfasdhu';
+
+export const toolCashServerAesConfig = {
+  key: 'e7U58gBJ3AVtyHcK',
+  iv: '2G8lJQpLmvqb14VC',
+}
