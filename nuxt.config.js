@@ -150,6 +150,6 @@ module.exports = {
   buildDir: env !== 'production' ? '.nuxt' : '.nuxt-prod',
   server: {
     port: Conf.network.port || 3000,
-    host: process.env.HOST || (env === 'production' ? 'localhost' : '0.0.0.0'),
+    host: process.env.HOST || (env === 'production' ? '0.0.0.0' : '0.0.0.0'),
   },
 }
