@@ -57,7 +57,13 @@ const AssistFn = {
     resData = {
       ...resData
     };
-    resData.data = this.decodeProxyServerData(resData.data);
+    if ((typeof resData.data === 'string') && resData.data) {
+      try {
+        resData.data = this.decodeProxyServerData(resData.data);
+      } catch (err) {
+        logger.error('[decodeProxyServerResData]', err, resData.data);
+      }
+    }
     return resData;
   },
 
