@@ -18,4 +18,6 @@ export default {
     database: 'tools_wealth_system',
     dateStrings: true,
   },
+
+  ssoEnv: 'dev',
 };

@@ -18,6 +18,7 @@
     "axios": "^0.21.0",
     "better-validator": "^2.1.9",
     "cross-env": "^7.0.2",
+    "jodo-sso-koa-plugin": "^0.0.3",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",

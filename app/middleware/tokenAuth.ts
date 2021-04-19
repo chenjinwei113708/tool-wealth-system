@@ -1,6 +1,7 @@
 // 检查用户会话
 import jwt from 'jsonwebtoken'; // 用来创建和确认用户信息摘要
 import { ParameterizedContext, Next } from 'koa';
+import { clearSSOStatus } from 'jodo-sso-koa-plugin';
 import Util from '../util/util';
 import { CookiesName, jwtSecret } from '@/config/common';
 import log4js from '../util/log4js';
@@ -56,6 +57,7 @@ export default {
         ctx.cookies.set(CookiesName.TOKEN, '', {
           expires: new Date(Date.now() - 1000)
         });
+        clearSSOStatus(ctx);
         ctx.resHandler({
           isSuccess: false,
           data: {
@@ -83,6 +85,7 @@ export default {
       ctx.cookies.set(CookiesName.TOKEN, '', {
         expires: new Date(Date.now() - 1000)
       });
+      clearSSOStatus(ctx);
       ctx.resHandler({
         isSuccess: false,
         data: {

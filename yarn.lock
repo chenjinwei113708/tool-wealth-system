@@ -7533,6 +7533,13 @@ jest@24.9.0:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
 
+jodo-sso-koa-plugin@^0.0.3:
+  version "0.0.3"
+  resolved "http://npmregistry.jododev.com/jodo-sso-koa-plugin/-/jodo-sso-koa-plugin-0.0.3.tgz#36f3bb8e0e957c75ff01adec9a9d30e35b4eef8b"
+  integrity sha512-b2PG3eUmkoV84a7YNa8mGsqrtUYf6n4fEC8TIRadHIuYskpXMWgjARpJNhAIIosH/VgN3/MS63j4ASVPQ9esQQ==
+  dependencies:
+    jsonwebtoken "^8.5.1"
+
 js-base64@^2.1.8:
   version "2.6.4"
   resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -8203,8 +8210,6 @@ lower-case@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmjs.org/lower-case/-/lower-case-2.0.2.tgz#6fa237c63dbdc4a82ca0fd882e4722dc5e634e28"
   integrity sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==
-  dependencies:
-    tslib "^2.0.3"
 
 lowercase-keys@^1.0.0:
   version "1.0.1"

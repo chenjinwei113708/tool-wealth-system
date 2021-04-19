@@ -3,7 +3,7 @@ import Util from 'util/util';
 import log4js from 'util/log4js';
 import http from 'lib/axios';
 import { CookiesName } from '@/config/common';
-import { clearSSOStatus } from '@/middleware/sso';
+import { clearSSOStatus } from 'jodo-sso-koa-plugin';
 import Conf from 'conf';
 
 import { Next, ParameterizedContext as Context } from 'koa';
