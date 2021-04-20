@@ -108,17 +108,19 @@ export default {
     ctx.checkValidator();
 
     const ts = Date.now();
-    const sign = AssistFn.createDataServerSign(ctx.username, ts);
+    const sign = AssistFn.createDataServerSign(ctx.username, 0);
 
     const resData = await http({
       url: `${dataCodeServerHost}/api/s1/redirect/aliyun/data/sqlQuery/queryByIdWithSign`,
       method: 'POST',
       headers: {
-        apiToken: `1513843088526,apiuser,C474C7F63547BF735E49F6A67096A07A`,
+        // apiToken: `1513843088526,apiuser,C474C7F63547BF735E49F6A67096A07A`,
+        user: ctx.username,
+        access_token: sign,
       },
       data: {
         id: 176,
-        timeStamp: ts,
+        // timeStamp: ts,
         variable: [
           { key: 'odps_priority', value: '2' },
           { key: '$startDate', value: startDate },
@@ -130,7 +132,7 @@ export default {
           { key: '$userid', value: userid },
         ],
         queryUser: ctx.username,
-        sign,
+        // sign,
       }
     });
 
