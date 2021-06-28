@@ -4,7 +4,7 @@ export default {
 
     serverHost: 'http://tool-cash-back-service-alihktest.k8sstudio.com',
     // serverHost: 'http://10.10.10.250:8080',
-    ssoCenter: 'http://localhost:7012',
+    ssoCenter: 'https://jodo-sso-center-alihktest.k8sstudio.com',
 
     // 数据平台代码查询
     dataCodeServerHost: 'https://data.jodoplay.com',

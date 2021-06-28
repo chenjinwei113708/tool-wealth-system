@@ -16,6 +16,29 @@ ltj0k2jirGadwGCLZQIDAQAB
 -----END PUBLIC KEY-----
 `;
 
+export class SSOError implements Error {
+  constructor (private msg: string, private errorCode: number = 500) {
+    this.msg = msg;
+    this.errorCode = errorCode;
+  }
+
+  get name () {
+    return 'SSOError';
+  }
+
+  get message () {
+    return this.msg;
+  }
+
+  get code () {
+    return this.errorCode;
+  }
+
+  toString () {
+    return `${this.errorCode},${this.msg}`;
+  }
+}
+
 export const clearSSOStatus = (ctx: ParameterizedContext) => {
   ctx.cookies.set('sso-token', '', {
     expires: new Date(Date.now() - 1000)
@@ -23,6 +46,16 @@ export const clearSSOStatus = (ctx: ParameterizedContext) => {
   ctx.cookies.set('sso-username', '', {
     expires: new Date(Date.now() - 1000)
   });
+}
+
+export function SSOAuthVerifyMiddleware () {
+
+  return function (ctx: ParameterizedContext, next: Next) {
+    if (ctx.ssoLogin && ctx.ssoInfo) {
+      return next();
+    }
+    throw new SSOError('no auth', 203);
+  }
 }
 
 export default function SSOMid (config?: SSOConfig) {
