@@ -1,8 +1,11 @@
 import { ParameterizedContext, Next } from 'koa';
 import jwt from 'jsonwebtoken';
+import nodeUrl from 'url';
 
 interface SSOConfig {
   whiteList?: string[];
+  ssoEnv?: string;
+  excludePrefix?: string[];  // 默认会对非 `/api` 开头的请求不进行权限校验，若需对某些开头对url进行权限校验则加上
 }
 
 const defaultWhiteList = ['/api/login', '/api/logout'];
@@ -49,29 +52,43 @@ export const clearSSOStatus = (ctx: ParameterizedContext) => {
 }
 
 export function SSOAuthVerifyMiddleware () {
-
   return function (ctx: ParameterizedContext, next: Next) {
     if (ctx.ssoLogin && ctx.ssoInfo) {
       return next();
     }
+    try {
+      clearSSOStatus(ctx);
+    } catch (err) {}
     throw new SSOError('no auth', 203);
   }
 }
 
-export default function SSOMid (config?: SSOConfig) {
+export function SSOAuthMiddleware (config?: SSOConfig) {
   const whiteList = config?.whiteList || defaultWhiteList;
+  const excludePrefix = config?.excludePrefix || [];
+  const ssoEnv = config?.ssoEnv || 'prod';
+  console.log('sso env: ', ssoEnv);
 
   return function (ctx: ParameterizedContext, next: Next) {
     const url = ctx.url;
-    if (whiteList.includes(url) || url.indexOf('/api/') !== 0) {
+    if (whiteList.includes(url)) {
       return next();
+    }
+    if (url.indexOf('/api/') !== 0) {
+      if (!excludePrefix.length || excludePrefix.every(prefix => url.indexOf(prefix) === -1)) {
+        return next();
+      }
     }
 
     // 检查cookie或者post的信息或者url查询参数或者头信息
+    const referer = ctx.headers.referer || '';
+    const refererSearchParams = new nodeUrl.URLSearchParams(referer);
     const token =
       ctx.cookies.get('sso-token') ||
-      ctx.headers['sso-token'];
-    const username = ctx.cookies.get('sso-username') || ctx.headers['sso-username'];
+      ctx.headers['sso-token'] ||
+      ctx.query['token'] ||
+      refererSearchParams.get('token');
+    const username = ctx.cookies.get('sso-username') || ctx.headers['sso-username'] || ctx.query['username'] || refererSearchParams.get('username');
 
     let ssoLogin = false;
     let ssoInfo = null;
@@ -81,6 +98,7 @@ export default function SSOMid (config?: SSOConfig) {
         if (decode.userInfo?.username === username) {
           ssoInfo = decode.userInfo;
           ssoLogin = true;
+          ctx.ssoUsername = username as string;
 
           if (!ctx.cookies.get('sso-token') && decode.userInfo.expireAt) {
             ctx.cookies.set('sso-token', token as string, {
