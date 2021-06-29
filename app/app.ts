@@ -10,6 +10,7 @@ import auth from './middleware/tokenAuth';
 import extendContext from './middleware/extendContext';
 import errMiddleware from './middleware/error';
 import { SSOAuthMiddleware } from 'jodo-sso-koa-plugin';
+// import { SSOAuthMiddleware } from './middleware/sso';
 
 const app = new Koa();
 const port = config.network.port;

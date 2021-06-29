@@ -3,7 +3,7 @@ export default {
     port: 24000,
 
     serverHost: 'http://tool-cash-back-service-alihktest.k8sstudio.com',
-    ssoCenter: 'http://10.10.10.155:7012',
+    ssoCenter: 'https://jodo-sso-center-alihktest.k8sstudio.com',
     // 数据平台代码查询
     dataCodeServerHost: 'https://jodo-analytics-aliyun-alihk01.k8sstudio.com',
   },

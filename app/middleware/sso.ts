@@ -1,6 +1,9 @@
 import { ParameterizedContext, Next } from 'koa';
 import jwt from 'jsonwebtoken';
 import nodeUrl from 'url';
+import md5 from 'md5';
+import axios from 'axios';
+import conf from 'conf'
 
 interface SSOConfig {
   whiteList?: string[];
@@ -18,6 +21,11 @@ NA2iZQbw3NeKW3hGwCqhJLSF1NmRx+KRaTKfOZnvz9IiHlBxuisCm9uvDVpwQlOz
 ltj0k2jirGadwGCLZQIDAQAB
 -----END PUBLIC KEY-----
 `;
+
+const http = axios.create({});
+// 重置
+http.interceptors.request.use(config => config);
+http.interceptors.response.use(res => res);
 
 export class SSOError implements Error {
   constructor (private msg: string, private errorCode: number = 500) {
@@ -69,7 +77,7 @@ export function SSOAuthMiddleware (config?: SSOConfig) {
   const ssoEnv = config?.ssoEnv || 'prod';
   console.log('sso env: ', ssoEnv);
 
-  return function (ctx: ParameterizedContext, next: Next) {
+  return async function (ctx: ParameterizedContext, next: Next) {
     const url = ctx.url;
     if (whiteList.includes(url)) {
       return next();
@@ -94,18 +102,34 @@ export function SSOAuthMiddleware (config?: SSOConfig) {
     let ssoInfo = null;
     try {
       if (token) {
-        const decode = jwt.verify(token as string, jwtPublicKey, { algorithms: ['RS256'] }) as any;
-        if (decode.userInfo?.username === username) {
-          ssoInfo = decode.userInfo;
+        const resData = await http({
+          url: `${conf.network.ssoCenter}/api/sso/verify`,
+          method: 'POST',
+          headers: {
+            'sso-sign': md5(`${token}${username}`),
+          },
+          data: {
+            token,
+            username,
+          }
+        })
+          .then(res => res.data)
+          .catch(e => {
+            return null;
+          });
+
+        if (resData?.isSuccess) {
+          const data = resData.data;
+          ssoInfo = data.userInfo;
           ssoLogin = true;
           ctx.ssoUsername = username as string;
 
-          if (!ctx.cookies.get('sso-token') && decode.userInfo.expireAt) {
+          if (!ctx.cookies.get('sso-token') && ssoInfo.expireAt) {
             ctx.cookies.set('sso-token', token as string, {
-              expires: new Date(decode.userInfo.expireAt)
+              expires: new Date(ssoInfo.expireAt)
             });
             ctx.cookies.set('sso-username', username as string, {
-              expires: new Date(decode.userInfo.expireAt)
+              expires: new Date(ssoInfo.expireAt)
             });
           }
         }
