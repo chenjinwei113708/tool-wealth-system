@@ -6,17 +6,18 @@
 
 (function () {
   window.J_IS_MOBILE = false;
+  var maxWidth = 1920;
   var docEl = document.documentElement,
     resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
     recalc = function () {
       var clientWidth = docEl.clientWidth;
       if (!clientWidth) return;
 
-      // 限制最大屏宽度为 1920px
-      if (clientWidth > 1920) {
-        clientWidth = 1920;
+      // 限制最大屏宽度为 maxWidth px
+      if (clientWidth > maxWidth) {
+        clientWidth = maxWidth;
       }
-      docEl.style.fontSize = (clientWidth * 0.1) + 'px';
+      docEl.style.fontSize = (clientWidth / 10) + 'px';
 
       window.J_IS_MOBILE = clientWidth <= 750;
     };

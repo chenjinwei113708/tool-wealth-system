@@ -59,7 +59,9 @@ export default {
   align-items: center;
   height: px2rem(132px);
   padding: 0 px2rem(45px);
+  // background-color: #000;
   background-color: #000;
+  // background-color: transparent;
 
   .h_title {
     overflow: hidden;
@@ -81,8 +83,8 @@ export default {
   .nav_link {
     display: inline-block;
     vertical-align: top;
-    height: px2rem(42px);
-    padding: px2rem(20px) px2rem(25px);
+    height: px2rem(90px);
+    padding: px2rem(10px) px2rem(15px);
     margin: 0 px2rem(10px);
     text-align: center;
 
